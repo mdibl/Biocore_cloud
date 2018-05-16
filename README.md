@@ -55,4 +55,38 @@ sudo yum install java-1.8.0
 sudo yum remove java-1.7.0-openjdk
 sudo service jenkins start
 And follow instructions
+
+When your instance is up and running do:
+1) Install s3 File system and Create mounts to our s3 buckets (https://cloudkul.com/blog/mounting-s3-bucket-linux-ec2-instance/)
+a) Install s3fs
+sudo yum update -y
+sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+cd s3fs-fuse
+sudo ./autogen.sh
+sudo ./configure --prefix=/usr --with-openssl
+sudo make
+sudo make install
+which s3fs
+sudo touch /etc/passwd-s3fs
+sudo vim /etc/passwd-s3fs  (then enter jenkins_accesskey:jenkins_secretkey)
+sudo chmod 640 /etc/passwd-s3fs
+sudo mkdir /mnt/data
+sudo mkdir /mnt/software
+sudo mkdir /mnt/logs
+sudo chown jenkins:jenkins /mnt/data
+sudo chown jenkins:jenkins /mnt/software
+sudo chown jenkins:jenkins /mnt/logs
+sudo s3fs biocore-data -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/data
+sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
+sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
+
+sudo vi  /etc/rc.local 
+and add the following lines:
+  sudo s3fs biocore-data -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/data
+  sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
+  sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
+
+
+
 ```
