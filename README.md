@@ -1,7 +1,7 @@
 # Setting Up Biocore Virtual Private Cloud network (VPCN)
 ## Why The Cloud?
 ## Jenkins
-### Lauch EC2 Instance using Elastic Beanstalk
+### Launch EC2 Instance using Elastic Beanstalk
 ```
  Warning:
  This EC2 instance is managed by AWS Elastic Beanstalk. Changes made via SSH 
