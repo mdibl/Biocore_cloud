@@ -90,6 +90,7 @@ and add the following lines:
   sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
   sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
 
+Add swap space to the instance - see steps earlier
 
 
 ```
