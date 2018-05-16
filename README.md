@@ -34,4 +34,10 @@ If you need more than 1024 then change that to something higher.
 To enable it by default after reboot, add this line to /etc/fstab:
 
 /var/swap.1   swap    swap    defaults        0   0
+
+Create Amazon EFS Mount Target
+sudo yum update -y
+sudo yum install nfs-utils 
+sudo mkdir /mnt/JENKINS_HOME
+sudo mount -t nfs4 -o vers=4.1 $(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone).fs-ac75cce4.efs.us-east-1.amazonaws.com:/ /mnt/JENKINS_HOME
 ```
