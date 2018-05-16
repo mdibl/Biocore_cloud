@@ -50,6 +50,9 @@ sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
 sudo yum install jenkins -y 
 sudo chown jenkins:jenkins /mnt/JENKINS_HOME
 sudo vi /etc/sysconfig/jenkins  ( and change JENKINS_HOME path to /mnt/JENKINS_HOME)
+sudo vi /etc/fstab (and add this line:
+fs-ac75cce4.efs.us-east-1.amazonaws.com:/        /mnt/JENKINS_HOME       nfs    defaults,vers=4.1        0   0
+)
 Before starting Jenkins Make sure jaba 8 is installed if not run:
 sudo yum install java-1.8.0
 sudo yum remove java-1.7.0-openjdk
