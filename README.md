@@ -10,11 +10,11 @@
  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html
 ```
 ### Configure The Created EC2 instance
-### Configure Jenkins Master Node
-### Add and Configure Worker Node
-##  Add Swap Space to EC2 instances
-##  Add S3 Mounts to EC2 Instances 
-##  Create Worker Node image and add more nodes
+### Create EFS Mount Target to host JENKINS_HOME
+### Configure and Launch Jenkins Master Node
+### Add and Configure Swap Space to EC2 instances
+### Add and Configure S3 Mounts to EC2 Instances 
+### Setup and Auto Scalling Group for Auto-recovery 
 ## Galaxy
 ## Cost Estimate
 
