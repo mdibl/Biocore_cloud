@@ -1,4 +1,23 @@
-# Setting Up Biocore Virtual Private Cloud network (VPCN)
+# Setting Up Biocore Jenkins on AWS 
+STEPS:
+1) On EC2 Dashboard Launch and Setup Jenkins Master Node 
+2) SSH to Master node and configure
+    * Setup Jenkins Host
+    * Install Java 8 on Master Node
+    * Create and configure EFS Mount Target to host JENKINS_HOME
+    * Create and Configure Swap Space 
+    * Create and Configure S3 Mounts
+    * Install Jenkins
+    * Start Jenkins
+3) On AWS console - Setup and Auto Scalling Group for Auto-recovery 
+    * Create and image for Jenkins host
+    * Create and configure Auto scaling 
+    * Create and configure auto scaling group
+    * Set up a load balancer pointing to your your auto Scaling group so that
+      you can consistently find your server using the load balancer DNS name (as your server gets
+      replaced, its IP address will change.)
+    * Create an AWS CloudFormation template 
+    
 ## Why The Cloud?
 ## Jenkins
 Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
@@ -26,9 +45,8 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 #### Launch Configure The Created EC2 instance - master node
 #### Install Java 8 on Master Node
 #### Create EFS Mount Target to host JENKINS_HOME
-#### Configure and Launch Jenkins Master Node
-#### Add and Configure Swap Space to EC2 instances
-#### Add and Configure S3 Mounts to EC2 Instances 
+#### Add Configure Swap Space to EC2 instances
+#### Add Configure S3 Mounts to EC2 Instances 
 ## Setup and Auto Scalling Group for Auto-recovery 
 
 ## Galaxy
