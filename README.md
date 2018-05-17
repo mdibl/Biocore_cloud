@@ -1,6 +1,6 @@
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
-1) On EC2 Dashboard Launch and Setup Jenkins Master Node 
+1) On EC2 Dashboard Launch and Setup Jenkins Master Node - An EC2 instance
 2) SSH to Master node and configure
     * Setup Jenkins Host
     * Install Java 8 on Master Node
