@@ -10,12 +10,14 @@ STEPS:
     * Install Jenkins
     * Start Jenkins
 3) On AWS console - Setup and Auto Scalling Group for Auto-recovery 
-    * Create and image for Jenkins host
+    * Create and configure image for Jenkins host
     * Create and configure Auto scaling 
     * Create and configure auto scaling group
+    * Create Load Balancer (classic) 
     * Set up a load balancer pointing to your your auto Scaling group so that
       you can consistently find your server using the load balancer DNS name (as your server gets
-      replaced, its IP address will change.)
+      replaced, its IP address will change.) 
+      see: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
     * Create an AWS CloudFormation template 
     
 ## Why The Cloud?
