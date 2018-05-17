@@ -1,9 +1,18 @@
 # Setting Up Biocore Virtual Private Cloud network (VPCN)
 ## Why The Cloud?
 ## Jenkins
-You can Launch a Jenkins instance on the cloud using tarditional deployment or using Elastic Beanstalk 
+Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
+Jenkins integrates very well across languages, platforms, and operating systems - Additionally Jenkins is widely documented
+ and open-source software.
 
-### Deploy Jenkins Instance using Elastic Beanstalk
+Our Jenkins setting consist on A single, large master server with multiple worker nodes connected to it.
+
+There are various ways You can Launch a Jenkins instance  on AWS cloud But we only explored the following:
+1) Traditional deployment, 
+2) Containized deployment,
+3) Deployment as a web server using Elastic Beanstalk.  
+
+### Deploy Jenkins Instance As a Web Server using Elastic Beanstalk
 ```
  Warning:
  EC2 instance launched using Elastic Beanstalk are managed by AWS Elastic Beanstalk - 
@@ -11,8 +20,9 @@ You can Launch a Jenkins instance on the cloud using tarditional deployment or u
  For more information on customizing your Elastic Beanstalk environment, see our documentation here: 
  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html
 ```
-### Deploy Jenkins Instance using Tradition
+### Deploy Jenkins Instance using Traditional Deployment 
 #### Launch Configure The Created EC2 instance - master node
+#### Install Java 8 on Master Node
 #### Create EFS Mount Target to host JENKINS_HOME
 #### Configure and Launch Jenkins Master Node
 #### Add and Configure Swap Space to EC2 instances
@@ -26,6 +36,9 @@ You can Launch a Jenkins instance on the cloud using tarditional deployment or u
 
 1) https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html
 2) https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html?icmpid=docs_ec2_console
+## Continuous Integration (CI)
+## Continuous Deployment (CD)
+With continuous deployment, revisions are deployed to a production environment automatically without explicit approval from a developer, making the entire software release process automated. This, in turn, allows for the product to be in front of its customers early on, and for feedback to start coming back to the development teams.
 
 ```
 Adding swap space to EC2 instance:
