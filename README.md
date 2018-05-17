@@ -55,6 +55,15 @@ sudo chmod 600 /var/swap.1
 sudo /sbin/swapon /var/swap.1
 If you need more than 1024 then change that to something higher.
 
+Example:
+sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=100M count=102400
+output: 
+    /bin/dd: error writing ‘/var/swap.1’: No space left on device
+    65+0 records in
+   64+0 records out
+   6789705728 bytes (6.8 GB) copied, 98.748 s, 68.8 MB/s
+
+
 To enable it by default after reboot, add this line to /etc/fstab:
 
 /var/swap.1   swap    swap    defaults        0   0
