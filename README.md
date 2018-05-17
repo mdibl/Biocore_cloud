@@ -15,6 +15,7 @@ STEPS:
     * Create and configure auto scaling group
     * Create Load Balancer (classic) -- 
          see: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-getting-started.html
+         https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups
     * Set up a load balancer pointing to your your auto Scaling group so that
       you can consistently find your server using the load balancer DNS name (as your server gets
       replaced, its IP address will change.) 
