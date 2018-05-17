@@ -1,20 +1,24 @@
 # Setting Up Biocore Virtual Private Cloud network (VPCN)
 ## Why The Cloud?
 ## Jenkins
-### Launch EC2 Instance using Elastic Beanstalk
+You can Launch a Jenkins instance on the cloud using tarditional deployment or using Elastic Beanstalk 
+
+### Deploy Jenkins Instance using Elastic Beanstalk
 ```
  Warning:
- This EC2 instance is managed by AWS Elastic Beanstalk. Changes made via SSH 
- WILL BE LOST if the instance is replaced by auto-scaling. For more information 
- on customizing your Elastic Beanstalk environment, see our documentation here: 
+ EC2 instance launched using Elastic Beanstalk are managed by AWS Elastic Beanstalk - 
+ Changes made via SSH WILL BE LOST if the instance is replaced by auto-scaling. 
+ For more information on customizing your Elastic Beanstalk environment, see our documentation here: 
  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html
 ```
-### Configure The Created EC2 instance
-### Create EFS Mount Target to host JENKINS_HOME
-### Configure and Launch Jenkins Master Node
-### Add and Configure Swap Space to EC2 instances
-### Add and Configure S3 Mounts to EC2 Instances 
-### Setup and Auto Scalling Group for Auto-recovery 
+### Deploy Jenkins Instance using Tradition
+#### Launch Configure The Created EC2 instance - master node
+#### Create EFS Mount Target to host JENKINS_HOME
+#### Configure and Launch Jenkins Master Node
+#### Add and Configure Swap Space to EC2 instances
+#### Add and Configure S3 Mounts to EC2 Instances 
+#### Setup and Auto Scalling Group for Auto-recovery 
+
 ## Galaxy
 ## Cost Estimate
 
