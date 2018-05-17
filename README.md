@@ -49,19 +49,23 @@ Paging works by creating an area on your hard drive and using it for extra memor
 
 To add this extra space to your instance you type:
 
-sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+## turn the swap off
+sudo swapoff -a
+sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=10
 sudo /sbin/mkswap /var/swap.1
 sudo chmod 600 /var/swap.1
+## Turn the swap back on 
 sudo /sbin/swapon /var/swap.1
-If you need more than 1024 then change that to something higher.
+
+This create a swap space of 10MB 
 
 Example:
-sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=100M count=102400
+sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=10
 output: 
-    /bin/dd: error writing ‘/var/swap.1’: No space left on device
-    65+0 records in
-   64+0 records out
-   6789705728 bytes (6.8 GB) copied, 98.748 s, 68.8 MB/s
+    sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=10
+    10+0 records in
+    10+0 records out
+    10485760 bytes (10 MB) copied, 0.00656499 s, 1.6 GB/s
 
 
 To enable it by default after reboot, add this line to /etc/fstab:
