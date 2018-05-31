@@ -101,27 +101,16 @@ To enable it by default after reboot, add this line to /etc/fstab:
 ### Create Amazon EFS Mount Target
 Use console 
 ### launch EC2 instance - jenkins master node
+When your instance is up and running  ssh to it and do:
 sudo yum update -y
+### Install file systems and create mounts
 sudo yum install nfs-utils 
 sudo mkdir /mnt/JENKINS_HOME
 sudo mount -t nfs4 -o vers=4.1 $(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone).fs-ac75cce4.efs.us-east-1.amazonaws.com:/ /mnt/JENKINS_HOME
-
-sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key 
-sudo yum install jenkins -y 
-sudo chown jenkins:jenkins /mnt/JENKINS_HOME
-sudo vi /etc/sysconfig/jenkins  ( and change JENKINS_HOME path to /mnt/JENKINS_HOME)
 sudo vi /etc/fstab (and add this line:
 fs-ac75cce4.efs.us-east-1.amazonaws.com:/        /mnt/JENKINS_HOME       nfs    defaults,vers=4.1        0   0
 )
-Before starting Jenkins Make sure jaba 8 is installed if not run:
-sudo yum install java-1.8.0
-sudo yum remove java-1.7.0-openjdk
-sudo service jenkins start
-And follow instructions
-
-When your instance is up and running do:
-1) Install s3 File system and Create mounts to our s3 buckets (https://cloudkul.com/blog/mounting-s3-bucket-linux-ec2-instance/)
+ Install s3 File system and Create mounts to our s3 buckets (https://cloudkul.com/blog/mounting-s3-bucket-linux-ec2-instance/)
 a) Install s3fs
 sudo yum update -y
 sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
@@ -150,6 +139,20 @@ and add the following lines:
   sudo s3fs biocore-data -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/data
   sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
   sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key 
+sudo yum install jenkins -y 
+sudo chown jenkins:jenkins /mnt/JENKINS_HOME
+sudo vi /etc/sysconfig/jenkins  ( and change JENKINS_HOME path to /mnt/JENKINS_HOME)
+
+Before starting Jenkins Make sure jaba 8 is installed if not run:
+sudo yum install java-1.8.0
+sudo yum remove java-1.7.0-openjdk
+sudo service jenkins start
+And follow instructions
+
 
 Add swap space to the instance - see steps earlier
 
