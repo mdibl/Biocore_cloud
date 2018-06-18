@@ -21,6 +21,8 @@ STEPS:
       replaced, its IP address will change.) 
       see: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
     * Create an AWS CloudFormation template 
+ 3) Create a Launch Template for jenkins master: 
+   https://docs.aws.amazon.com/autoscaling/ec2/userguide/copy-launch-config.html
     
 ## Why The Cloud?
 ## Jenkins
