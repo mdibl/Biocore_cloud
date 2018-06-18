@@ -98,6 +98,7 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 
 ## Setting up auto-scaling jenkins
+## https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
 ### Create Amazon EFS Mount Target
 Use console 
 ### launch EC2 instance - jenkins master node
