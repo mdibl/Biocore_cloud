@@ -9,6 +9,10 @@ STEPS:
     * Create and Configure S3 Mounts
     * Install Jenkins
     * Start Jenkins
+    * Set StrictHostKeyChecking to no in /etc/ssh/ssh_config
+      This allow the master not to prompt before adding a new host to known_host file
+      whenever a new worker is detected
+      
 3) On AWS console - Setup and Auto Scalling Group for Auto-recovery 
     * Create and configure image for Jenkins host
     * Create and configure Auto scaling 
