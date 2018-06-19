@@ -9,7 +9,7 @@ STEPS:
     * Create and Configure S3 Mounts
     * Install Jenkins
     * Start Jenkins
-    * Set StrictHostKeyChecking to no in /etc/ssh/ssh_config
+    * Set StrictHostKeyChecking to no in /etc/ssh/ssh_config for all users or in ~/.ssh/config for the current user
       This allow the master not to prompt before adding a new host to known_host file
       whenever a new worker is detected
       
