@@ -12,6 +12,7 @@ Our Jenkins setting consist on A single, large master server with multiple worke
 ### Jenkins master with dedicated EC2 instances slaves
 ### Jenkins master with Spot fleet slaves
  ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
+ --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
  
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
