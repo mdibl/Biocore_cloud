@@ -1,3 +1,18 @@
+# Jenkins On Amazon Clound
+
+Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
+Jenkins integrates very well across languages, platforms, and operating systems - Additionally Jenkins is widely documented
+ and open-source software.
+
+Our Jenkins setting consist on A single, large master server with multiple worker nodes connected to it via EC2 Spot Fleet 
+
+## Use Cases
+### Jenkins master with on demand slaves
+ -- see: https://www.cakesolutions.net/teamblogs/jenkins-and-on-demand-slaves-in-aws
+### Jenkins master with dedicated EC2 instances slaves
+### Jenkins master with Spot fleet slaves
+ ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
+ 
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
 1) On EC2 Dashboard Launch and Setup Jenkins Master Node - An EC2 instance
@@ -28,13 +43,9 @@ STEPS:
  3) Create a Launch Template for jenkins master: 
    https://docs.aws.amazon.com/autoscaling/ec2/userguide/copy-launch-config.html
     
-## Why The Cloud?
-## Jenkins
-Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
-Jenkins integrates very well across languages, platforms, and operating systems - Additionally Jenkins is widely documented
- and open-source software.
 
-Our Jenkins setting consist on A single, large master server with multiple worker nodes connected to it.
+
+
 
 There are various ways You can Launch a Jenkins instance  on AWS cloud But we only explored the following:
 1) Traditional deployment, 
