@@ -1,4 +1,4 @@
-# Jenkins On Amazon Clound
+# Biocore Jenkins On The Amazon Clound
 
 Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
 Jenkins integrates very well across languages, platforms, and operating systems - Additionally Jenkins is widely documented
