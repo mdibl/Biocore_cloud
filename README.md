@@ -71,8 +71,11 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 #### Add Configure S3 Mounts to EC2 Instances 
 ## Setup and Auto Scalling Group for Auto-recovery 
 
-## Galaxy
+# Galaxy
 ## Cost Estimate
+
+# Setting up a HPC cluster 
+https://aws.amazon.com/hpc/sc15/getting-started/
 
 ## Appendix 
 
