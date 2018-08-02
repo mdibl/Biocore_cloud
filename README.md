@@ -59,13 +59,11 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 ## Setup Jenkins Master Node 
 
 ### Deploy Jenkins Instance As a Web Server using Elastic Beanstalk
-```
  Warning:
  EC2 instance launched using Elastic Beanstalk are managed by AWS Elastic Beanstalk - 
  Changes made via SSH WILL BE LOST if the instance is replaced by auto-scaling. 
  For more information on customizing your Elastic Beanstalk environment, see our documentation here: 
- http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html
-```
+
 ### Deploy Jenkins Instance using Traditional Deployment 
 #### Launch Configure The Created EC2 instance - master node
 #### Install Java 8 on Master Node
@@ -74,11 +72,7 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 #### Add Configure S3 Mounts to EC2 Instances 
 ## Setup and Auto Scalling Group for Auto-recovery 
 
-# Galaxy
-## Cost Estimate
-
-# Setting up a HPC cluster 
-https://aws.amazon.com/hpc/sc15/getting-started/
+```
 
 ## Appendix 
 
