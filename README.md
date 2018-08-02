@@ -1,10 +1,12 @@
-# Biocore Jenkins On The Amazon Clound
+# Biocore On The Amazon Clound
 
-Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
-Jenkins integrates very well across languages, platforms, and operating systems - Additionally Jenkins is widely documented
- and open-source software.
+Biocore uses Jenkins as a project management tool. Jenkins is a very popular 
+product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
+Jenkins integrates very well across languages, platforms, and operating systems - 
+Additionally Jenkins is widely documented and open-source software.
 
-Our Jenkins setting consist on A single, large master server with multiple worker nodes connected to it via EC2 Spot Fleet 
+Our Jenkins setting consist on A single, large master server with multiple worker nodes.
+Worker nodes are EC2 Spot Fleet 
 
 ## Use Cases
 ### Jenkins master with on demand slaves
@@ -13,7 +15,8 @@ Our Jenkins setting consist on A single, large master server with multiple worke
 ### Jenkins master with Spot fleet slaves
  ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
  --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
- 
+
+```
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
 1) On EC2 Dashboard Launch and Setup Jenkins Master Node - An EC2 instance
