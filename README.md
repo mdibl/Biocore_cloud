@@ -1,4 +1,4 @@
-# Biocore On The Amazon Clound
+# Biocore On The Amazon Cloud
 
 Biocore uses Jenkins as a project management tool. Jenkins is a very popular 
 product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
