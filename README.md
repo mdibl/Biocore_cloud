@@ -17,6 +17,18 @@ Worker nodes are EC2 Spot Fleet
  --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
 
 ```
+# Creating access Key ID and Secret key
+1) Create a new user group "jenkins" (IAM -> Groups)
+2) Set the following policies for the new group
+   a) AmazonS3FullAcess
+   b) AmazonEC2FullAccess
+3) Create a new user "ec2-user" with programtic access(IAM->Users -> Add user)
+   a) Add user to "jenkins" group
+   b) Create Security credentials (IAM -> ec2-user->security credentials ->Create access Key)
+      since the secret key is generated only once, it's advisible to copy
+      both the Access Key ID and the security key  and save them in a file somewhere
+      in your system where only you can read it
+      
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
 1) On EC2 Dashboard Launch and Setup Jenkins Master Node - An EC2 instance
