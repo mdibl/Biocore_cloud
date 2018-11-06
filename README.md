@@ -129,47 +129,44 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 ## Setting up auto-scaling jenkins
 ## https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
-### Create Amazon EFS Mount Target
-Use console 
-### launch EC2 instance - jenkins master node
-When your instance is up and running  ssh to it and do:
-sudo yum update -y
-### Install file systems and create mounts
-sudo yum install nfs-utils 
-sudo mkdir /mnt/JENKINS_HOME
-sudo mount -t nfs4 -o vers=4.1 $(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone).fs-ac75cce4.efs.us-east-1.amazonaws.com:/ /mnt/JENKINS_HOME
-sudo vi /etc/fstab (and add this line:
-fs-ac75cce4.efs.us-east-1.amazonaws.com:/        /mnt/JENKINS_HOME       nfs    defaults,vers=4.1        0   0
-)
- Install s3 File system and Create mounts to our s3 buckets (https://cloudkul.com/blog/mounting-s3-bucket-linux-ec2-instance/)
-a) Install s3fs
-sudo yum update -y
-sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
-git clone https://github.com/s3fs-fuse/s3fs-fuse.git
-cd s3fs-fuse
-sudo ./autogen.sh
-sudo ./configure --prefix=/usr --with-openssl
-sudo make
-sudo make install
-which s3fs
-sudo touch /etc/passwd-s3fs
-sudo vim /etc/passwd-s3fs  (then enter jenkins_accesskey:jenkins_secretkey)
-sudo chmod 640 /etc/passwd-s3fs
-sudo mkdir /mnt/data
-sudo mkdir /mnt/software
-sudo mkdir /mnt/logs
-sudo chown jenkins:jenkins /mnt/data
-sudo chown jenkins:jenkins /mnt/software
-sudo chown jenkins:jenkins /mnt/logs
-sudo s3fs biocore-data -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/data
-sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
-sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
 
-sudo vi  /etc/rc.local 
-and add the following lines:
-  sudo s3fs biocore-data -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/data
-  sudo s3fs biocore-software -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/software
-  sudo s3fs biocore-logs -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /mnt/logs
+
+### Create Amazon EFS Mount Target using two file systems - EFS and S3 file systems
+#### Create a file system using aws console - https://console.aws.amazon.com/efs/home?region=us-east-1#/filesystems
+#### and get the created file system ID
+#### launch EC2 instance  using aws console 
+#### ssh to the launched EC2 instance and:
+* sudo yum update -y
+### Install EFS file system
+** sudo yum install nfs-utils 
+### Install S3 file system  - (https://cloudkul.com/blog/mounting-s3-bucket-linux-ec2-instance/)
+** sudo yum update -y
+** sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+** git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+** cd s3fs-fuse
+** sudo ./autogen.sh
+** sudo ./configure --prefix=/usr --with-openssl
+** sudo make
+** sudo make install
+** which s3fs
+** sudo touch /etc/passwd-s3fs
+** sudo vim /etc/passwd-s3fs  (then enter awsuser_accesskey:awsuser_secretkey)
+** sudo chmod 640 /etc/passwd-s3fs
+
+### Create different mount endpoints on both EFS and S3 file systems
+We will create town mount endpoints (/data, /opt/software) one on each file system
+** sudo mkdir /data
+** sudo mkdir /opt/software
+### Create a mount on efs 
+** sudo mount -t nfs4 -o vers=4.1 $(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone).efs_id.amazonaws.com:/ /data
+### Create a mount for your s3 bucket 
+** sudo s3fs my-s3-bucket-name -o use_cache=/tmp -o allow_other -o uid=497 -o mp_umask=002 -o multireq_max=20 /data
+
+
+** sudo vi /etc/fstab  -- and add this line:
+s3fs#my-s3-bucket-name   /data   fuse    allow_other,use_cache=/tmp/cache,umask=0002,uid=0,gid=1001       0       0
+** sudo vi /etc/fstab (and add this line:
+fs-ac75cce4.efs.us-east-1.amazonaws.com:/        /mnt/JENKINS_HOME       nfs    defaults,vers=4.1        0   0
 
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
