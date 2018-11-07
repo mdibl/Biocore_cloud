@@ -94,6 +94,31 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 ## Continuous Deployment (CD)
 With continuous deployment, revisions are deployed to a production environment automatically without explicit approval from a developer, making the entire software release process automated. This, in turn, allows for the product to be in front of its customers early on, and for feedback to start coming back to the development teams.
 
+### Updating PATH systemwide to include path to executables installed in non conventional locations
+1) ssh to your machine
+2) cd to /etc/profile.d/
+3) sudo touch biocore.sh
+4) sudo edit biocore.sh to add:
+```
+ # Add /opt/software/bin to the path for sh compatible users
+if ! echo $PATH | grep -q /opt/software/bin ; then
+  export PATH=/opt/software/bin:$PATH
+fi
+## Add /opt/software/external/pyenv/bin
+if ! echo $PATH | grep -q /opt/software/external/pyenv/bin ; then
+  export PATH=/opt/software/external/pyenv/bin:$PATH
+fi
+## Add /opt/software/external/pyenv/shims
+if ! echo $PATH | grep -q /opt/software/external/pyenv/shims ; then
+  export PATH=/opt/software/external/pyenv/shims:$PATH
+fi
+## Add /opt/software/external/pyenv/plugins/pyenv-virtualenv/shims
+if ! echo $PATH | grep -q /opt/software/external/pyenv/plugins/pyenv-virtualenv/shims ; then
+  export PATH=/opt/software/external/pyenv/plugins/pyenv-virtualenv/shims:$PATH
+fi
+```
+5) Logout then re-login to to test the path
+
 ```
 Adding swap space to EC2 instance:
 
