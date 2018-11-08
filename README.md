@@ -8,15 +8,10 @@ Additionally Jenkins is widely documented and open-source software.
 Our Jenkins setting consists on A single master server (free tier)  with multiple worker nodes.
 Worker nodes are EC2 Spot Fleet 
 
-## Use Cases
-### Jenkins master with on demand slaves
- -- see: https://www.cakesolutions.net/teamblogs/jenkins-and-on-demand-slaves-in-aws
-### Jenkins master with dedicated EC2 instances slaves
-### Jenkins master with Spot fleet slaves
- ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
- --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
 
-## Steps to setup Your organization's Jenkins master with Spot fleet slave
+## Steps to setup MDIBL's Jenkins master with Spot fleet slaves
+
+### Amazon EC2 Console
 1) Create EC2 instance -> Image -> launch configuration -> launch template -> Spot fleet
 2) Creating access Key ID and Secret key
 ```
@@ -30,12 +25,21 @@ Worker nodes are EC2 Spot Fleet
       since the secret key is generated only once, it's advisible to copy
       both the Access Key ID and the security key  and save them in a file somewhere
       in your system where only you can read it
-```      
+``` 
+### Jenkins Server
 2) Manage Jenkins -> Manage plugins
     a) install Amazon EC2 plugin
     b) install EC2 Fleet plugin
 3) Manage Jenkins ->  Configure System -> Cloud -> Add New Cloud -> Amazon SpotFleet
-   
+
+## Use Cases
+### Jenkins master with on demand slaves
+ -- see: https://www.cakesolutions.net/teamblogs/jenkins-and-on-demand-slaves-in-aws
+### Jenkins master with dedicated EC2 instances slaves
+### Jenkins master with Spot fleet slaves
+ ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
+ --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
+
 ```
 
 # Setting Up Biocore Jenkins on AWS 
