@@ -16,19 +16,28 @@ Worker nodes are EC2 Spot Fleet
  ---  https://jenkins.io/blog/2016/06/10/save-costs-with-ec2-spot-fleet/
  --- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-examples.html
 
+## Steps to setup Your organization's Jenkins master with Spot fleet slave
+1) Create EC2 instance -> Image -> launch configuration -> launch template -> Spot fleet
+2) Creating access Key ID and Secret key
 ```
-# Creating access Key ID and Secret key
-1) Create a new user group "jenkins" (IAM -> Groups)
-2) Set the following policies for the new group
+* Create a new user group "jenkins" (IAM -> Groups)
+* Set the following policies for the new group
    a) AmazonS3FullAcess
    b) AmazonEC2FullAccess
-3) Create a new user "ec2-user" with programtic access(IAM->Users -> Add user)
+* Create a new user "ec2-user" with programtic access(IAM->Users -> Add user)
    a) Add user to "jenkins" group
    b) Create Security credentials (IAM -> ec2-user->security credentials ->Create access Key)
       since the secret key is generated only once, it's advisible to copy
       both the Access Key ID and the security key  and save them in a file somewhere
       in your system where only you can read it
-      
+```      
+2) Manage Jenkins -> Manage plugins
+    a) install Amazon EC2 plugin
+    b) install EC2 Fleet plugin
+3) Manage Jenkins ->  Configure System -> Cloud -> Add New Cloud -> Amazon SpotFleet
+   
+```
+
 # Setting Up Biocore Jenkins on AWS 
 STEPS:
 1) On EC2 Dashboard Launch and Setup Jenkins Master Node - An EC2 instance
