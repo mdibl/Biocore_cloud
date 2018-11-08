@@ -5,8 +5,8 @@ product among software companies who want to automate their Continuous Integrati
 Jenkins integrates very well across languages, platforms, and operating systems - 
 Additionally Jenkins is widely documented and open-source software.
 
-Our Jenkins setting consists on A single master server (free tier)  with multiple worker nodes.
-Worker nodes are EC2 Spot Fleet 
+Our Jenkins setting consists on A single master server with multiple worker nodes.
+Worker nodes are a hybrid of Amazon EC2 Spot Fleets and MDIBL servers 
 
 
 ## Steps to setup MDIBL's Jenkins master with Spot fleet slaves
