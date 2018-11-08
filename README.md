@@ -31,7 +31,17 @@ Worker nodes are a hybrid of Amazon EC2 Spot Fleets and MDIBL servers
     a) install Amazon EC2 plugin
     b) install EC2 Fleet plugin
 3) Manage Jenkins ->  Configure System -> Cloud -> Add New Cloud -> Amazon SpotFleet
-
+    a) AWS Crendentials -> Add -> Jenkins Credentials
+    ```
+       Kind: AWS Creadentials
+       Access Key ID : set to access key ID created earlier
+       Secret Access Key: ste to security key generated ealier
+    ```
+    b) Region : select the region of the fleet created earlier
+    c) Spot Fleet: select the availbale fleet 
+    d) Launcher: select 'Launch agent agents via SSH'
+    e) Credentials: select the cloud user with credentials used 
+    
 ## Use Cases
 ### Jenkins master with on demand slaves
  -- see: https://www.cakesolutions.net/teamblogs/jenkins-and-on-demand-slaves-in-aws
