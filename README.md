@@ -13,7 +13,7 @@ Worker nodes are a hybrid of Amazon EC2 Spot Fleets and MDIBL servers
 
 ### Amazon EC2 Console
 1) Create EC2 instance -> Image -> launch configuration -> launch template -> Spot fleet
-2) Creating access Key ID and Secret key
+2) Create cloud user ->  access Key ID and Secret key
 ```
 * Create a new user group "jenkins" (IAM -> Groups)
 * Set the following policies for the new group
