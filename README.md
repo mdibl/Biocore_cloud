@@ -133,6 +133,10 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 
 1) https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html
 2) https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html?icmpid=docs_ec2_console
+3) https://aws.amazon.com/ec2/instance-types/
+4) https://aws.amazon.com/efs/pricing/
+5) https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-optimize-cpu.html#instance-specify-cpu-options
+
 ## Continuous Integration (CI)
 ## Continuous Deployment (CD)
 With continuous deployment, revisions are deployed to a production environment automatically without explicit approval from a developer, making the entire software release process automated. This, in turn, allows for the product to be in front of its customers early on, and for feedback to start coming back to the development teams.
