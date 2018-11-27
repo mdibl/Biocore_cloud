@@ -136,6 +136,8 @@ There are various ways You can Launch a Jenkins instance  on AWS cloud But we on
 3) https://aws.amazon.com/ec2/instance-types/
 4) https://aws.amazon.com/efs/pricing/
 5) https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-optimize-cpu.html#instance-specify-cpu-options
+6) https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html
+7)https://docs.aws.amazon.com/AWSGettingStartedContinuousDeliveryPipeline/latest/GettingStarted/CICD_Jenkins_Pipeline.html#step-1-build-an-ecs-cluster
 
 ## Continuous Integration (CI)
 ## Continuous Deployment (CD)
