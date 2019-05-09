@@ -171,8 +171,9 @@ fi
 ```
 5) Logout then re-login to to test the path
 
+
+## Adding swap space to EC2 instance:
 ```
-Adding swap space to EC2 instance:
 
 A fix for this problem is to add swap (i.e. paging) space to the instance.
 
@@ -202,13 +203,14 @@ output:
 To enable it by default after reboot, add this line to /etc/fstab:
 
 /var/swap.1   swap    swap    defaults        0   0
-
+```
 
 ## Setting up auto-scaling jenkins
-## https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
+  https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html
 
 
-### Create Amazon EFS Mount Target using two file systems - EFS and S3 file systems
+## Create Amazon EFS Mount Target using two file systems - EFS and S3 file systems
+```
 #### Create a file system using aws console - https://console.aws.amazon.com/efs/home?region=us-east-1#/filesystems
 #### and get the created file system ID
 #### launch EC2 instance  using aws console 
@@ -245,6 +247,20 @@ s3fs#my-s3-bucket-name   /data   fuse    allow_other,use_cache=/tmp/cache,umask=
 ** sudo vi /etc/fstab (and add this line:
 fs-ac75cce4.efs.us-east-1.amazonaws.com:/        /mnt/JENKINS_HOME       nfs    defaults,vers=4.1        0   0
 
+sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport  fs-9cfe74d4.efs.us-east-1.amazonaws.com:/ /data
+
+sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport  fs-56fe741e.efs.us-east-1.amazonaws.com:/ /mnt/transformed
+
+example commands on non-aws servers:
+sudo s3fs biocore-data  -o passwd_file=/etc/passwd-s3fs -o uid=500 -o gid=1001 -o mp_umask=002 -o allow_other -o use_cache=/tmp  -o multireq_max=20 /data
+
+sudo s3fs biocore-software  -o passwd_file=/etc/passwd-s3fs -o uid=500 -o gid=1001 -o mp_umask=002 -o allow_other -o use_cache=/tmp  -o multireq_max=20 /opt/software
+
+##### The fstab file
+fs-9cfe74d4.efs.us-east-1.amazonaws.com:/       /data    nfs     nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport       0       0
+fs-3cda4f74.efs.us-east-1.amazonaws.com:/       /opt/software   nfs     nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport       0       0               
+```
+## Install Jenkins
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key 
@@ -257,9 +273,5 @@ sudo yum install java-1.8.0
 sudo yum remove java-1.7.0-openjdk
 sudo service jenkins start
 And follow instructions
-
-
-Add swap space to the instance - see steps earlier
-
 
 ```
