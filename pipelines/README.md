@@ -6,9 +6,11 @@ run a given pipeline.
 ## Workflow:  
 
 
-     [<img src="../images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
+
+ [<img src="../images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
      
-     
+ 
+ 
 ### Option 1: Run multiple pipelines on local servers 
 * gen-project-config => json_generator => gen-pipeline-pcf => pipelines-in-parallel/local => gen-matrix
 
