@@ -39,6 +39,8 @@ You have the following four options to run your pipeline :
   Option 4: Run single pipeline on AWS Instance
          gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local => gen-matrix
 
+```
+
 ## Scripts and Files Organization
 
 **Documentation ( docs/)**
