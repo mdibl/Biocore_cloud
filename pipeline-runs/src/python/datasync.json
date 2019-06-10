@@ -1,0 +1,655 @@
+{
+    "account_id": "012870262837",
+    "current_efs_file_systems": {
+        "fs-1b77c3f8": {
+            "LifeCycleState": "available",
+            "NumberOfMountTargets": 6,
+            "Tags": [
+                {
+                    "Key": "Data Internal",
+                    "Value": "Data Internal Bucket"
+                }
+            ]
+        },
+        "fs-3cda4f74": {
+            "LifeCycleState": "available",
+            "NumberOfMountTargets": 6,
+            "Tags": [
+                {
+                    "Key": "Software",
+                    "Value": "Software Bucket"
+                }
+            ]
+        },
+        "fs-7d7cc89e": {
+            "LifeCycleState": "available",
+            "NumberOfMountTargets": 6,
+            "Tags": [
+                {
+                    "Key": "Data Transformed",
+                    "Value": "Data Transformed Bucket"
+                }
+            ]
+        },
+        "fs-858b3f66": {
+            "LifeCycleState": "available",
+            "NumberOfMountTargets": 6,
+            "Tags": [
+                {
+                    "Key": "Scratch",
+                    "Value": "Scratch file system"
+                }
+            ]
+        },
+        "fs-9cfe74d4": {
+            "LifeCycleState": "available",
+            "NumberOfMountTargets": 6,
+            "Tags": [
+                {
+                    "Key": "Data",
+                    "Value": "Data Bucket"
+                }
+            ]
+        }
+    },
+    "datasync_active_agents": {
+        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37": "Biocore data sync agent"
+    },
+    "datasync_locations": {
+        "efs": [
+            {
+                "CreationTime": 1558025031.053,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0776eb411da62ae40",
+                "LocationUri": "efs://us-east-1.fs-3cda4f74/"
+            },
+            {
+                "CreationTime": 1558025122.47,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-069690d277ca1e1fc",
+                "LocationUri": "efs://us-east-1.fs-3cda4f74/"
+            },
+            {
+                "CreationTime": 1558036282.863,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b551e0462d679d30",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/RSEM-v1.3.0/"
+            },
+            {
+                "CreationTime": 1558036575.677,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0f802a5f6e59e9a0f",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/STAR-2.6.1b/"
+            },
+            {
+                "CreationTime": 1558037525.176,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-00dfada4cb9ca8c4e",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/RSEM-v1.3.0/"
+            },
+            {
+                "CreationTime": 1558038571.594,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e2e1ce589aeb05f3",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/transformed/RSEM-v1.3.0/ensembl-94/"
+            },
+            {
+                "CreationTime": 1558038870.51,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0c56649f5a49b091f",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/transformed/STAR-2.6.1b/ensembl-94/"
+            },
+            {
+                "CreationTime": 1558109284.363,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-04bd5b775f3fc6e0c",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/transformed/STAR-2.6.1b/ensembl-94/"
+            },
+            {
+                "CreationTime": 1558109618.029,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e45bc30fd4589848",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/transformed/STAR-2.6.1b/"
+            },
+            {
+                "CreationTime": 1558281242.791,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-03172cde6fa91cc18",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/scratch/rna-seq/VootYin/"
+            },
+            {
+                "CreationTime": 1558281434.054,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0964bb7abf74beaa8",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/scratch/rna-seq/VootYin/Zebrafish_Heart_mir21_2015/"
+            },
+            {
+                "CreationTime": 1558294129.221,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-065529e9c3a5531ef",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/scratch/ensembl-94/"
+            },
+            {
+                "CreationTime": 1558295354.77,
+                "Ec2Config": {
+                    "SecurityGroupArns": [
+                        "arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
+                    ],
+                    "SubnetArn": "arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
+                },
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-03f0a77361d009b85",
+                "LocationUri": "efs://us-east-1.fs-9cfe74d4/projects/Biocore/biocore_projects/"
+            }
+        ],
+        "nfs": [
+            {
+                "CreationTime": 1557850633.971,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0f094194814be5809",
+                "LocationUri": "nfs://fs-9cfe74d4.efs.us-east-1.amazonaws.com/transformed/RSEM-v1.3.0/ensembl-94/mus_musculus-genome/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-065e6922406b72277"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557851722.944,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0216e96d96c85d6a6",
+                "LocationUri": "nfs://fs-9cfe74d4.efs.us-east-1.amazonaws.com/transformed/RSEM-v1.3.0/ensembl-94/mus_musculus-transcriptome_joined/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-065e6922406b72277"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557859746.49,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0c5a01088b3ddd338",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/projects/Biocore/biocore-pipelines/pipeline-runs-meta/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557860892.916,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-09ed3e005399b22aa",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/projects/Biocore/biocore-pipelines/rna-seq/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557862271.107,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0c1a47c2d8a591bc1",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557863220.367,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b0709aae3a64ea34",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/software/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1557870074.112,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-095de76560e5bbc4e",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/scratch/ensembl-94/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558036282.128,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0089a52e72df1599f",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/RSEM-v1.3.0/ensembl-94/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558036575.24,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0ddfa3892142e4aee",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/STAR-2.6.1b/ensembl-94/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558037524.839,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0f976738fb2492288",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/RSEM-v1.3.0/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558038571.192,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-013b126cc64bfdad6",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/RSEM-v1.3.0/ensembl-94/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558038870.034,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-04952db8a8fbbce6d",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/STAR-2.6.1b/ensembl-94/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558109617.428,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0465a9adf9a6b6a78",
+                "LocationUri": "nfs://file09-vlan251.mdibl.net/biocore02/transformed/STAR-2.6.1b/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558281033.962,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e5fcb4dcc515b0d5",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/scratch/rna-seq/VootYin/Zebrafish_Heart_mir21_2015/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            },
+            {
+                "CreationTime": 1558295150.09,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0852418f683c60d3d",
+                "LocationUri": "nfs://file03-vlan251.mdibl.net/biocore01/projects/Biocore/biocore_projects/",
+                "OnPremConfig": {
+                    "AgentArns": [
+                        "arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
+                    ]
+                }
+            }
+        ],
+        "s3": [
+            {
+                "CreationTime": 1557850633.956,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-03a2e75851f1dcac1",
+                "LocationUri": "s3://biocore-data/transformed/RSEM-v1.3.0/ensembl-94/mus_musculus-genome/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557851722.837,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0d8c6eb42fb637945",
+                "LocationUri": "s3://biocore-data/transformed/RSEM-v1.3.0/ensembl-94/mus_musculus-transcriptome_joined/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557858970.132,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0f65365fe549707cb",
+                "LocationUri": "s3://biocore-data/scratch/rna-seq/VootYin/Mouse_KO_2019/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557860125.932,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-08d466b8c64f49119",
+                "LocationUri": "s3://biocore-data/projects/Biocore/biocore-pipelines/pipeline-runs-meta/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557860397.791,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-08b0bcbdd9318b1e7",
+                "LocationUri": "s3://biocore-data/projects/Biocore/biocore-pipelines/rna-seq/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557860892.994,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b8896a93662a9813",
+                "LocationUri": "s3://biocore-data/projects/Biocore/biocore-pipelines/rna-seq/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557862823.012,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-01c1dfd5deddc4da2",
+                "LocationUri": "s3://biocore-data/transformed/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            },
+            {
+                "CreationTime": 1557863435.271,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0146dfd285cdae504",
+                "LocationUri": "s3://biocore-software/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-software"
+                }
+            },
+            {
+                "CreationTime": 1557870229.45,
+                "LocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-015c754ec383c0212",
+                "LocationUri": "s3://biocore-data/scratch/ensembl-94/",
+                "S3Config": {
+                    "BucketAccessRoleArn": "arn:aws:iam::012870262837:role/service-role/AWSDataSyncS3BucketAccess-biocore-data"
+                }
+            }
+        ]
+    },
+    "datasync_tasks": [
+        {
+            "CreationTime": 1557860126.105,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-08d466b8c64f49119",
+            "ErrorCode": "MountFailure",
+            "ErrorDetail": "mount.nfs: mounting file03-vlan251.mdibl.net:/biocore01/projects/Biocore/biocore-pipelines/pipeline-runs-meta failed, reason given by server: No such file or directory",
+            "Name": "biocore.pipeline-runs-meta",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0c5a01088b3ddd338",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-0fc81227d8cbd41b8"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1557860893.179,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b8896a93662a9813",
+            "ErrorCode": "MountFailure",
+            "ErrorDetail": "mount.nfs: mounting file03-vlan251.mdibl.net:/biocore01/projects/Biocore/biocore-pipelines/rna-seq failed, reason given by server: No such file or directory",
+            "Name": "biocore.rna-seq",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-09ed3e005399b22aa",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-0d511e8930341e091"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1557862823.164,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-01c1dfd5deddc4da2",
+            "Name": "data.transformed",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0c1a47c2d8a591bc1",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-02293dce64755bf4b"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1557863435.439,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0146dfd285cdae504",
+            "Name": "opt.software",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b0709aae3a64ea34",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-048f4aab8f4432871"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1557870229.591,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-015c754ec383c0212",
+            "Name": "ensembl-94  datasets",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-095de76560e5bbc4e",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-01e229171bc685e1a"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1558025122.622,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-069690d277ca1e1fc",
+            "Name": "efs.software",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0b0709aae3a64ea34",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-07d946f261c13936b"
+        },
+        {
+            "CloudWatchLogGroupArn": "arn:aws:logs:us-east-1:012870262837:log-group:RDSOSMetrics",
+            "CreationTime": 1558038571.869,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e2e1ce589aeb05f3",
+            "Name": "efs.rsem.ens94",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-013b126cc64bfdad6",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-013f15540649cbf45"
+        },
+        {
+            "CreationTime": 1558109618.331,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e45bc30fd4589848",
+            "Name": "EFS.STAR",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0465a9adf9a6b6a78",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-0cc767065989d8e06"
+        },
+        {
+            "CreationTime": 1558281434.499,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0964bb7abf74beaa8",
+            "Name": "scratch.vootyin.Zebrafish_Heart_mir21_2015",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0e5fcb4dcc515b0d5",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-0326ab5c1614a087c"
+        },
+        {
+            "CreationTime": 1558294129.71,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-065529e9c3a5531ef",
+            "Name": "efs.scratch.ensembl94",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-095de76560e5bbc4e",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-08ad544ab4bb11ccd"
+        },
+        {
+            "CreationTime": 1558295498.365,
+            "DestinationLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-03f0a77361d009b85",
+            "Name": "efs.biocore_projects",
+            "Options": {
+                "Atime": "BEST_EFFORT",
+                "BytesPerSecond": -1,
+                "Gid": "INT_VALUE",
+                "Mtime": "PRESERVE",
+                "PosixPermissions": "PRESERVE",
+                "PreserveDeletedFiles": "PRESERVE",
+                "PreserveDevices": "NONE",
+                "Uid": "INT_VALUE",
+                "VerifyMode": "POINT_IN_TIME_CONSISTENT"
+            },
+            "SourceLocationArn": "arn:aws:datasync:us-east-1:012870262837:location/loc-0852418f683c60d3d",
+            "Status": "AVAILABLE",
+            "TaskArn": "arn:aws:datasync:us-east-1:012870262837:task/task-027e78442f2ee3513"
+        }
+    ],
+    "region_id": "us-east-1",
+    "security_group_id": "sg-30f3ff79",
+    "subnet_id": "subnet-6b46b90c"
+}
