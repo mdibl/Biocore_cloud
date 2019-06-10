@@ -21,7 +21,7 @@ See::
 
 
 
- [<img src="../images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
+ [<img src="images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
 
 
 You have the following four options to run your pipeline :
