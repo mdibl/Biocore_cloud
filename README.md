@@ -19,7 +19,7 @@ Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers
 ## Biocore-AWS Hybrid System Overview  
 
 
-     [<img src="images/biocore-aws-hybrid-system.png">](biocore-aws-hybrid-system.png)
+  [<img src="images/biocore-aws-hybrid-system.png">](biocore-aws-hybrid-system.png)
 
 
 ## Biocore Pipeline Run Stepss
