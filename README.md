@@ -2,7 +2,7 @@
 
 Biocore uses Jenkins as a project management tool. We use Jenkins to launch pipeline analysis projects  either on local servers or on the Amazon Cloud servers, or on both. 
 
-Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines. Jenkins integrates very well across languages, platforms, and operating systems - 
+Jenkins is a very popular product among software development groups. Jenkins integrates very well across languages, platforms, and operating systems - 
 Additionally Jenkins is widely documented and open-source software.
 
 Our Jenkins setting consists on A single master server with multiple worker nodes.
