@@ -53,14 +53,24 @@ You have the following four options to run your pipeline :
 
 ## Scripts and Files Organization
 * README.md	
-* cfgs/		
+- [cfgs/ ](config-files-sub-directory)		
 * docs/		
 * images/		
 * src/
 
-**docs/**
+### Config files Sub-directory
 
-All the associated documents - pdf, words, powerpoint,.. - are stored under docs/
+A set of biocore global settings and   program-specific default command line options
+* aws.cfg	       - connection settings and path to the info on to AWS	servers
+* jenkins.cfg    - connetion settings to Jenkins 
+* biocore.cfg		        - setting expected structure to biocore info
+* rna-seq.template.json - json template for rna-seq pipelines
+
+* cutadapt.tool_options.cfg	
+* cwl.tool_options.cfg		
+* bowtie2.aligner_options.cfg	
+* fastqc.tool_options.cfg		
+* trimmomatic.tool_options.cfg
 
 **images/**
 
