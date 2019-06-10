@@ -53,16 +53,16 @@ You have the following four options to run your pipeline :
 
 ## Scripts and Files Organization
 * README.md	
-* cfgs		
-* docs		
-* images		
-* src
+* cfgs/		
+* docs/		
+* images/		
+* src/
 
-**Documentation ( docs/)**
+**docs/**
 
 All the associated documents - pdf, words, powerpoint,.. - are stored under docs/
 
-**Images (images/)**
+**images/**
 
 All associated images are under the images sub-directory
 
