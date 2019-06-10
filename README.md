@@ -12,10 +12,10 @@ See:
      [<img src="images/biocore-aws-hybrid-system.png">](biocore-aws-hybrid-system.png)
 
 
-## Package Overview
+## Repository Overview
   
-This is a base directory  for **scripts and configuration files** used to
-run a given pipeline.
+This is the base directory  for **scripts and configuration files** used to
+run a given biocore pipeline analysis.
 
 See::
 
