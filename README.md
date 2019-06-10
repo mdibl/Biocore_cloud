@@ -1,18 +1,27 @@
 # Biocore On The Amazon Cloud
 
-Biocore uses Jenkins as a project management tool. Jenkins is a very popular 
-product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines.
-Jenkins integrates very well across languages, platforms, and operating systems - 
+Biocore uses Jenkins as a project management tool. We use Jenkins to lauch pipeline analysis projects  either on local servers or on the Amazon Cloud servers, or on both. 
+
+Jenkins is a very popular product among software companies who want to automate their Continuous Integration/Continuous Deployment pipelines. Jenkins integrates very well across languages, platforms, and operating systems - 
 Additionally Jenkins is widely documented and open-source software.
 
 Our Jenkins setting consists on A single master server with multiple worker nodes.
 Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers 
 
-See:
+
+# Quick Links
+
+- [Biocore-AWS Hybrid System Overview ](#biocore-aws-hybrid-system-overview)
+- [Biocore Pipeline Run Options And Steps](#biocore-pipeline-run-steps)
+- [Repository Information Organization](#scripts-and-files-organization)
+
+
+## Biocore-AWS Hybrid System Overview  
+
      [<img src="images/biocore-aws-hybrid-system.png">](biocore-aws-hybrid-system.png)
 
 
-## Repository Overview
+## Biocore Pipeline Run Stepss
   
 This is the base directory  for **scripts and configuration files** used to
 run a given biocore pipeline analysis.
