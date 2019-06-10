@@ -22,7 +22,7 @@ Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers
   [<img src="images/biocore-aws-hybrid-system.png">](biocore-aws-hybrid-system.png)
 
 
-## Biocore Pipeline Run Stepss
+## Biocore Pipeline Run Steps
   
 This is the base directory  for **scripts and configuration files** used to
 run a given biocore pipeline analysis.
