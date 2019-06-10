@@ -18,7 +18,7 @@ run a given pipeline.
 * gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local => gen-matrix
 
 
-See:
+
      [<img src="../images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
 
 ## GOAL
