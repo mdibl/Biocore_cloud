@@ -1,9 +1,22 @@
 # Overview
 
-A base for scripts and configuration files used to
+A base directory  for **scripts and configuration files** used to
 run a given pipeline.
 
-## Workflow:   gen_config.sh => gen_pcf.sh => build_pipeline.sh
+## Workflow:  
+
+### Option 1: Run multiple pipelines on local servers 
+* gen-project-config => json_generator => gen-pipeline-pcf => pipelines-in-parallel/local => gen-matrix
+
+### Option 2:  Run multiple pipelines on AWS cloud servers
+* gen-project-config => json_generator => gen-pipeline-pcf => pipelines-in-parallel/cloud => gen-matrix
+
+### Option 3: Run single pipeline on local server
+* gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local 
+
+### Option 4: Run single pipeline on AWS Instance
+* gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local => gen-matrix
+
 
 ## GOAL
 Create an automation that runs pipelines in parallel using Jenkins server.
