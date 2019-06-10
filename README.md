@@ -19,7 +19,7 @@ Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers
 ## Biocore-AWS Hybrid System Overview  
 
 
-  [<img src="images/biocore-aws-hybrid-system.png">](images/biocore-aws-hybrid-system.png) <!-- .element height="50%" width="50%" -->
+  [<img src="images/biocore-aws-hybrid-system.png">](images/biocore-aws-hybrid-system.png)
 
 
 ## Biocore Pipeline Run Steps
@@ -31,7 +31,7 @@ See::
 
 
 
- [<img src="images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
+ [<img src="images/biocore-pipelines-scripts.png">](images/biocore-pipelines-scripts.png)
 
 
 You have the following four options to run your pipeline :
