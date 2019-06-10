@@ -19,7 +19,7 @@ run a given pipeline.
 
 
 See:
-     [<img src="images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
+     [<img src="../images/biocore-pipelines-scripts.png">](biocore-pipelines-scripts.png)
 
 ## GOAL
 Create an automation that runs pipelines in parallel using Jenkins server.
