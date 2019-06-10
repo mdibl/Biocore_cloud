@@ -52,6 +52,11 @@ You have the following four options to run your pipeline :
 ```
 
 ## Scripts and Files Organization
+* README.md	
+* cfgs		
+* docs		
+* images		
+* src
 
 **Documentation ( docs/)**
 
