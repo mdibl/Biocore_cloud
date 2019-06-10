@@ -53,7 +53,7 @@ You have the following four options to run your pipeline :
 
 ## Scripts and Files Organization
 * README.md	
-- [cfgs/ ](config-files-sub-directory)		
+- [cfgs/ ](#config-files-sub-directory)		
 * docs/		
 * images/		
 * src/
@@ -61,10 +61,10 @@ You have the following four options to run your pipeline :
 ### Config files Sub-directory
 
 A set of biocore global settings and   program-specific default command line options
-* aws.cfg	       - connection settings and path to the info on to AWS	servers
-* jenkins.cfg    - connetion settings to Jenkins 
-* biocore.cfg		        - setting expected structure to biocore info
-* rna-seq.template.json - json template for rna-seq pipelines
+* **aws.cfg**	       - connection settings and path to the info on to AWS	servers
+* **jenkins.cfg**    - connetion settings to Jenkins 
+* **biocore.cfg**		        - setting expected structure to biocore info
+* **rna-seq.template.json** - json template for rna-seq pipelines
 
 * cutadapt.tool_options.cfg	
 * cwl.tool_options.cfg		
