@@ -65,12 +65,14 @@ A set of biocore global settings and   program-specific default command line opt
 * **jenkins.cfg**    - connetion settings to Jenkins 
 * **biocore.cfg**		        - setting expected structure to biocore info
 * **rna-seq.template.json** - json template for rna-seq pipelines
-
-* cutadapt.tool_options.cfg	
-* cwl.tool_options.cfg		
-* bowtie2.aligner_options.cfg	
-* fastqc.tool_options.cfg		
-* trimmomatic.tool_options.cfg
+```
+Others: 
+   * cutadapt.tool_options.cfg	
+   * cwl.tool_options.cfg		
+   * bowtie2.aligner_options.cfg	
+   * fastqc.tool_options.cfg		
+   * trimmomatic.tool_options.cfg
+```
 
 **images/**
 
