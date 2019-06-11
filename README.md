@@ -52,11 +52,15 @@ You have the following four options to run your pipeline :
 ```
 
 ## Scripts and Files Organization
-* README.md	
+
+All the in-house scripts used to run the pipelines are  github version-controlled. 
+The main repository is **biocore_cloud** and has the following structure:
+
+- README.md	
 - [cfgs/ ](#config-files-sub-directory)		
-* docs/		
-* images/		
-* src/
+- docs/		
+- [images/](#images-sub-directory)	
+- src/
 
 ### Config files Sub-directory
 
@@ -74,7 +78,8 @@ Others:
    * trimmomatic.tool_options.cfg
 ```
 
-**images/**
+### Images Sub-directory
+* **images/**  -- static images of the different associated processes
 
 All associated images are under the images sub-directory
 
