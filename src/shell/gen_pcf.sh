@@ -15,7 +15,9 @@ script_name=`basename $0`
 ## Check expected structure
 working_dir=`pwd`
 parent_dir=`dirname $working_dir`
-cfgs_dir=$parent_dir/cfgs
+cfg_dir_base=`dirname $parent_dir`
+cfgs_dir=$cfg_dir_base/cfgs
+
 PIPELINE_CONFIG_FILE=$1
 CWL_OPTIONS_CONFIG=$cfgs_dir/cwl.tool_options.cfg
 invalid_user="no such user"

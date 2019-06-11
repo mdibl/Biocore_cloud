@@ -1,7 +1,7 @@
 ##
 ## Assumptions: assumes the following structure under the working directory
-#   1) cfgs
-#   2) src
+#   1) ../../cfgs
+#   2) ../src
 ## Assumptions: assumes the following config files in the cfgs directory
 #  1) biocore.cfg
 # 
@@ -12,7 +12,8 @@ script_name=`basename $0`
 ## Check expected structure
 working_dir=`pwd`
 parent_dir=`dirname $working_dir`
-cfgs_dir=$parent_dir/cfgs
+cfg_dir_base=`dirname $parent_dir`
+cfgs_dir=$cfg_dir_base/cfgs
 
 ##Matches team names  under /data/internal
 PIPELINE_OWNER=$1
@@ -75,8 +76,8 @@ then
    echo "    PIPELINE_RESULTS_BASE: results base - according to our standards"
    echo ""
    echo "Assumptions: assumes the following - relative to the script"
-   echo "   1) ../cfgs "
-   echo "   2) ../cfgs/biocore.cfg"
+   echo "   1) ../../cfgs "
+   echo "   2) ../../cfgs/biocore.cfg"
    echo ""
    echo "Example:"
    echo "    ./$script_name gmurray JimCoffman jcoffman_001.embryo_cortisol_2015 danio_rerio ensembl 93 \
@@ -130,11 +131,18 @@ source  $cfgs_dir/biocore.cfg
 #Project design file
 ORIGINAL_READS_BASE=${BIOCORE_INFO_PATH[INTERNAL_DATA_BASE]}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 DESIGN_FILE=${ORIGINAL_READS_BASE}/${PROJECT_NAME}.design.txt
+REF_DATA_BASE=${BIOCORE_INFO_PATH[SCRATCH_BASE]}/$REF_DATABASE-$REF_DATABASE_VERSION
+
 echo `date`>>$log_file
 
 if [ ! -d  $ORIGINAL_READS_BASE ]
 then
    echo "ERROR: Invalid Path to original reads - Expected $ORIGINAL_READS_BASE" | tee -a $log_file
+   exit 1
+fi
+if [ ! -d  $REF_DATA_BASE ]
+then
+   echo "ERROR: Invalid Path to the reference data version - Expected $REF_DATA_BASE" | tee -a $log_file
    exit 1
 fi
 if [ ! -f $DESIGN_FILE ]
