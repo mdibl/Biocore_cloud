@@ -137,7 +137,9 @@ Assumptions:
 3) ORIGINAL_READS_BASE path is /data/internal/team/project/  and must exist
 4) DESIGN_FILE must exist -- or program fails
 5) PIPELINE_READS_BASE  must exist or the program fails
-6) CWL_SCRIPT must exist or failure 
+6) CWL_SCRIPT must exist or the program fails 
+7)  /data/scratch/REF_DATABASE-REF_DATABASE_VERSION must exist or the program fails
+
 
 ```
 ## Appendix 
