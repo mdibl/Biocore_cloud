@@ -86,9 +86,32 @@ Others:
 ### Images Sub-directory
 * **images/**  -- static images of the different associated processes
 
-All associated images are under the images sub-directory
+### Scripts 
 
+There are three main parts in running the pipeline in Biocore environment.
 
+- Generating the experiment-level config file (pipeline.cfg)
+- Generating sample-specific json and pcf files
+- Triggering pipeline nuns 
+
+#### The experiment-level  config file Generator
+- **Script:  src/shell/gen_config.sh**
+- **What it does:**  
+generates the main config file(pipeline.cfg) for this project runID. This main config file sets global environment variables specific to this runID and used by different downstream processes. The generated config file is stored under PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/
+
+- **Can be ran Either:**
+```
+ - On the Command :  ./gen_config.sh  PIPELINE_OWNER PROJECT_TEAM_NAME \
+          PROJECT_NAME ORGANISM  REF_DATABASE REF_DATABASE_VERSION \ 
+         CWL_SCRIPT PIPELINE_PCF_BASE PIPELINE_JSON_BASE \
+         PIPELINE_READS_BASE \PIPELINE_RESULTS_BASE
+
+ - Or Using Jenkins GUI
+   * Log onto to Jenkins 
+   * Run  the job Cwl_Workflows => cwl_workflows => generate-configs => generate-project-config  
+     by clicking on “Build with parameters”
+
+```
 ## Appendix 
 
 1) https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html
