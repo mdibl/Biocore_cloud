@@ -53,7 +53,7 @@ then
    echo "****************************************************"
    echo ""
    echo "What It Does: generates the main config file(pipeline.cfg) for this project runID."
-   echo "This main config file sets global enviroment variables used by different downstream proccesses. "
+   echo "This main config file sets global environment variables used by different downstream proccesses. "
    echo "The generated config file is stored under PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/"
    echo ""
    echo "Usage: ./$script_name PIPELINE_OWNER PROJECT_TEAM_NAME PROJECT_NAME ORGANISM \
