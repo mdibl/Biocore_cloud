@@ -86,9 +86,60 @@ Others:
 ### Images Sub-directory
 * **images/**  -- static images of the different associated processes
 
-All associated images are under the images sub-directory
+### Scripts 
 
+There are three main parts in running the pipeline in Biocore environment.
 
+- Generating the experiment-level config file (pipeline.cfg)
+- Generating sample-specific json and pcf files
+- Triggering pipeline nuns 
+
+#### The experiment-level  config file Generator
+
+- **Script:  src/shell/gen_config.sh**
+```
+- What it does: 
+
+generates the main config file(pipeline.cfg) for this project runID. This main config file sets global environment variables specific to this runID and used by different downstream processes. The generated config file is stored under PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/
+
+- Can be ran Either:
+ * On the Command :  ./gen_config.sh  PIPELINE_OWNER PROJECT_TEAM_NAME \
+          PROJECT_NAME ORGANISM  REF_DATABASE REF_DATABASE_VERSION \ 
+         CWL_SCRIPT PIPELINE_PCF_BASE PIPELINE_JSON_BASE \
+         PIPELINE_READS_BASE \PIPELINE_RESULTS_BASE
+
+ *  Or Using Jenkins GUI
+    ** Log onto to Jenkins 
+    ** Run  the job Cwl_Workflows => cwl_workflows => generate-configs => generate-project-config  
+       by clicking on “Build with parameters”
+
+Input:
+    1) PIPELINE_OWNER:  The username for the owner of the pipeline results directory - Must be a valid username.
+    2) PROJECT_TEAM_NAME: the team name associated with this project -  as found under /data/internal
+    3) PROJECT_NAME: The project name - as found under /data/internal/team_name/ - according to our standards
+    4) ORGANISM: The organism name - according to our standards
+    5) REF_DATABASE: The reference database source - according to our standards - see /data/external
+    6) REF_DATABASE_VERSION: The reference database version - example 95  for ensembl release 95
+    7) CWL_SCRIPT: full path to the cwl script to use for this pipeline
+    8) PIPELINE_PCF_BASE: pcf files base - 
+        will store/read sample-specifc pcf ffiles under PIPELINE_PCF_BASE/team/project/runID
+    9)  PIPELINE_JSON_BASE: json files base  - 
+        will store/read sample-specific json files under PIPELINE_JSON_BASE/team/project/runID
+    10) PIPELINE_READS_BASE: input reads base - will look for sequence reads under PIPELINE_READS_BASE/team/project/
+    11) PIPELINE_RESULTS_BASE: results base - will store results under PIPELINE_RESULTS_BASE/team/project/runID/
+
+Output: PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/pipeline.cfg 
+
+Assumptions:
+
+1) PIPELINE_RESULTS_BASE must exist - or the program fails
+2) PIPELINE_READS_BASE must exist - or the program fails
+3) ORIGINAL_READS_BASE path is /data/internal/team/project/  and must exist
+4) DESIGN_FILE must exist -- or program fails
+5) PIPELINE_READS_BASE  must exist or the program fails
+6) CWL_SCRIPT must exist or failure 
+
+```
 ## Appendix 
 
 1) https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html
