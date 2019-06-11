@@ -45,7 +45,7 @@ RESULTS_DIR=${RESULTS_DIR_BASE}/$current_timestamp
 
 READS_BASE=${10}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 
-if [ -z "$results_base" ]
+if [[ -z "$results_base" || ! -d $results_base ]]
 then
    echo ""
    echo "****************************************************"
@@ -79,7 +79,11 @@ then
    echo "   2) ../cfgs/biocore.cfg"
    echo ""
    echo "Example:"
-   echo "    ./$script_name gmurray JimCoffman jcoffman_001.embryo_cortisol_2015 danio_rerio  ensembl 93 /opt/software/external/ggr-cwl/GGR-cwl/v1.0/RNA-seq_pipeline/pipeline-pe-unstranded-with-sjdb.cwl  /data/projects/Biocore/biocore_analysis/biocore_projects/pipeline-runs-meta /data/projects/Biocore/biocore_analysis/biocore_projects/rna-seq /data/scratch/rna-seq  /data/scratch/rna-seq"
+   echo "    ./$script_name gmurray JimCoffman jcoffman_001.embryo_cortisol_2015 danio_rerio ensembl 93 \
+    /opt/software/external/ggr-cwl/GGR-cwl/v1.0/RNA-seq_pipeline/pipeline-pe-unstranded-with-sjdb.cwl  \
+    /data/projects/Biocore/biocore_analysis/biocore_projects/pipeline-runs-meta \
+    /data/projects/Biocore/biocore_analysis/biocore_projects/rna-seq \
+    /data/scratch/rna-seq  /data/scratch/rna-seq"
    echo ""
    exit 1
 fi
@@ -110,6 +114,11 @@ then
    echo "ERROR: Missing biocore.cfg under $cfgs_dir"
    exit 1
 fi
+if [ ! -d $READS_BASE ]
+then
+   echo "ERROR: Invalid path to sequence reads - $READS_BASE"
+   exit 1
+fi
 [ ! -d $logs_base ] && mkdir -p $logs_base
 [ ! -d $pipeline_config_base ] && mkdir -p $pipeline_config_base
 [ -f $pipeline_cfg_file ] && rm -f $pipeline_cfg_file
@@ -122,9 +131,21 @@ source  $cfgs_dir/biocore.cfg
 ORIGINAL_READS_BASE=${BIOCORE_INFO_PATH[INTERNAL_DATA_BASE]}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 DESIGN_FILE=${ORIGINAL_READS_BASE}/${PROJECT_NAME}.design.txt
 echo `date`>>$log_file
+
+if [ ! -d  $ORIGINAL_READS_BASE ]
+then
+   echo "ERROR: Invalid Path to original reads - Expected $ORIGINAL_READS_BASE" | tee -a $log_file
+   exit 1
+fi
 if [ ! -f $DESIGN_FILE ]
 then
-   echo "WARNING: Design file missing - see $DESIGN_FILE" | tee -a $log_file
+   echo "ERROR: Design file missing - expected: $DESIGN_FILE" | tee -a $log_file
+   exit 1
+fi
+if [ ! -f $CWL_SCRIPT ]
+then
+   echo "ERROR: CWL Script missing - see $CWL_SCRIPT" | tee -a $log_file
+   exit 1
 fi
 touch $pipeline_cfg_file
 echo "###################################################" >> $pipeline_cfg_file
