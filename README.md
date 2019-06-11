@@ -62,13 +62,18 @@ The main repository is **biocore_cloud** and has the following structure:
 - [images/](#images-sub-directory)	
 - src/
 
+We install this git repository locally under 
+
+* **/opt/software/internal**
+
 ### Config files Sub-directory
 
-A set of biocore global settings and   program-specific default command line options
-* **aws.cfg**	       - connection settings and path to the info on to AWS	servers
-* **jenkins.cfg**    - connetion settings to Jenkins 
-* **biocore.cfg**		        - setting expected structure to biocore info
-* **rna-seq.template.json** - json template for rna-seq pipelines
+A set of biocore global settings and   program-specific default command line options.
+* **cfgs/**
+   - **aws.cfg**	       - connection settings and path to the info on to AWS	servers
+   - **jenkins.cfg**    - connetion settings to Jenkins 
+   - **biocore.cfg**		        - setting expected structure to biocore info
+   - **rna-seq.template.json** - json template for rna-seq pipelines
 ```
 Others: 
    * cutadapt.tool_options.cfg	
