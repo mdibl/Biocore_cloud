@@ -36,7 +36,8 @@ then
    exit 1
 fi
 date
-if [[ -z "${PIPELINE_CONFIG_FILE}" || ! -f ${PIPELINE_CONFIG_FILE ]
+
+if [[ -z "${PIPELINE_CONFIG_FILE}" || ! -f ${PIPELINE_CONFIG_FILE}  ]]
 then
    echo ""
    echo "****************************************************"
