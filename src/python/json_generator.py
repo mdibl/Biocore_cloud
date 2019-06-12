@@ -175,9 +175,6 @@ if __name__== "__main__":
         json_template=project_env["JSON_TEMPLATE"]
     design_file=project_env["DESIGN_FILE"]
 
-    if not isfile(log_file):
-        print("ERROR: Log file not created - see:%s"%(log_file))
-        sys.exit()
     if not isdir(json_base_dir):
         print("ERROR: Json files base directory does not exist - see:%s"%(json_base_dir))
         print("create the above directory and try again.")
