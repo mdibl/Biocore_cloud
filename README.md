@@ -166,7 +166,7 @@ Variables of interest for this step:
   5)READS_BASE
 
 - Usage - either:
- * On the Command :  ./json_generator.py [-h] -c path2project_runID_main_config/cfgs/pipeline.cfg 
+ * On the Command :  python path2/json_generator.py -c path2project_runID_main_config/cfgs/pipeline.cfg 
                        [-j path2project_runID_json_template/cfgs/template.json] [-s fastq]
 
  * Where:
@@ -181,6 +181,14 @@ Variables of interest for this step:
     ** Run  the job Cwl_Workflows => cwl_workflows => generate-configs => generate-json
        by clicking on “Build with parameters”
 
+Example: 
+       python path2/json_generator.py  -c path2results/teamName/projectName/runID/cfgs/pipeline.cfg -s fastq
+       OR 
+       python path2/json_generator.py  -c path2results/teamName/projectName/runID/cfgs/pipeline.cfg 
+                    -j path2results/teamName/projectName/runID/cfgs/template.json
+       OR
+       python path2/json_generator.py  --cfg=path2results/teamName/projectName/runID/cfgs/pipeline.cfg 
+       
 Output: 
    1) Generates sample-specific json files under PATH2_JSON_FILES/PROJECT_TEAM_NAME/PROJECT_NAME/runID/
    2) Generates a log file for this step under LOG_BASE/
