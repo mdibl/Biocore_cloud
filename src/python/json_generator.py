@@ -29,17 +29,19 @@ def prog_usage():
  Usage: PROG [-h] -c path2project_runID_main_config/cfgs/pipeline.cfg [-j path2project_runID_json_template/cfgs/template.json] [-s fastq]
  Where:
      -h To show the usage
-     -c path2/pipeline.cfg or --cfg=path2/pipeline.cfg  ... required, 
-     -j path2/template.json or --jtemp=path2/template.json ... optional(default - read from pipeline.cfg), 
+     -c path2runID/cfgs/pipeline.cfg or --cfg=path2runID/cfgs/pipeline.cfg  ... required, 
+     -j path2runID/cfgs/template.json or --jtemp=path2runID/cfgs/template.json ... optional
+                                        (default - gets template path from pipeline.cfg), 
      -s fatsq.gz or --suffix=fastq.gz ... optional(default fastq), reads files suffix 
       
- What It Does: Uses the json template to generate sample-specific json files under the location specified in the pipeline.cfg
-      for json files. 
+ What It Does: Uses the json template to generate sample-specific json files under 
+               the location specified in the pipeline.cfg for json files. 
 
  Example: 
        python PROG  -c path2results/teamName/projectName/runID/cfgs/pipeline.cfg -s fastq
        OR 
-       python PROG  -c path2results/teamName/projectName/runID/cfgs/pipeline.cfg -j path2results/teamName/projectName/runID/cfgs/template.json
+       python PROG  -c path2results/teamName/projectName/runID/cfgs/pipeline.cfg 
+                    -j path2results/teamName/projectName/runID/cfgs/template.json
        OR
        python PROG  --cfg=path2results/teamName/projectName/runID/cfgs/pipeline.cfg 
  
