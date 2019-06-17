@@ -61,7 +61,7 @@ The main repository is **biocore_cloud** and has the following structure:
 - docs/		
 - [images/](#images-sub-directory)	
 - [src/](#scripts-sub-directory)
--- [src/shell/gen_config.sh](#the-experiment-level-config-file-Generator)
+** [src/shell/gen_config.sh](#the-experiment-level-config-file-Generator)
 
 We install this git repository locally under 
 
