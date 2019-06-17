@@ -106,10 +106,8 @@ def mkdir_p(path):
     try:
         os.makedirs(path)
     except OSError as exc:  # Python >2.5
-        if exc.errno == errno.EEXIST and isdir(path):
-            pass
-        else:
-            pass
+        #if exc.errno == errno.EEXIST and isdir(path):
+        pass
 
 if __name__== "__main__":
     try:
@@ -208,6 +206,7 @@ if __name__== "__main__":
         try:
             for line in f.readlines():
                 if "Sample" in line:continue
+                if "sample_id" in line:continue
                 fields=line.split('\t')
                 sample=SampleDOM(fields[0],reads,reads_suffix)
                 read_file_format='sampleID[delimiter]readID[delimiter][...]suffix'
@@ -245,4 +244,4 @@ if __name__== "__main__":
 
     log.write("Program complete\n")
     print("Program complete\n")
-    sys.exit(0)
+    sys.exit()
