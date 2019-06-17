@@ -61,7 +61,8 @@ The main repository is **biocore_cloud** and has the following structure:
 - docs/		
 - [images/](#images-sub-directory)	
 - [src/](#scripts-sub-directory)
-  - [The Experiment-level Congig file generator: src/shell/gen_config.sh](#the-experiment-level-config-file-Generator)
+  - [Sample-specific json file generator: src/shell/gen_config.sh](#the-experiment-level-config-file-Generator)
+  - [The Experiment-level Congig file generator: src/pyhton/json_generator.py](#the-experiment-level-config-file-Generator)
 
 We install this git repository locally under 
 
@@ -141,6 +142,51 @@ Assumptions:
 6) CWL_SCRIPT must exist or the program fails 
 7)  /data/scratch/REF_DATABASE-REF_DATABASE_VERSION must exist or the program fails
 
+
+```
+
+### Sample-specific json file Generator
+
+- **Script:  src/pyhton/json_generator.py**
+
+```
+- What it does: 
+
+The tool generates sample-specific json files for a given experiment. It uses the json template
+in addition to the project config file to generate sample-specific json files.
+It gets project global environment variables from the path2project_runID_main_config/cfgs/pipeline.cfg.
+Variables of interest for this step:
+
+  1)LOG_BASE
+  2)JSON_TEMPLATE
+  3)PATH2_JSON_FILES
+  4)DESIGN_FILE  
+  5)READS_BASE
+
+
+- Usage - either:
+ * On the Command :  ./json_generator.py [-h] -c path2project_runID_main_config/cfgs/pipeline.cfg 
+                       [-j path2project_runID_json_template/cfgs/template.json] [-s fastq]
+
+ * Where:
+     -h To show the usage
+     -c path2runID/cfgs/pipeline.cfg or --cfg=path2runID/cfgs/pipeline.cfg  ... required, 
+     -j path2runID/cfgs/template.json or --jtemp=path2runID/cfgs/template.json ... optional
+          (default - get template path from pipeline.cfg), 
+     -s fatsq.gz or --suffix=fastq.gz ... optional(default fastq), reads files suffix 
+     
+ *  Or Using Jenkins GUI
+    ** Log onto to Jenkins 
+    ** Run  the job Cwl_Workflows => cwl_workflows => generate-configs => generate-json
+       by clicking on “Build with parameters”
+
+Output: 
+   1) Generates sample-specific json files under PATH2_JSON_FILES/PROJECT_TEAM_NAME/PROJECT_NAME/runID/
+   2) Generates a log file for this step under LOG_BASE/
+
+Assumptions:
+       1) User has full permission to create sample-specific json files
+       2) The json template has been generated in the same directory as the pipeline.cfg file
 
 ```
 ## Appendix 
