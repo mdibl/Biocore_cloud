@@ -130,7 +130,9 @@ Input:
     10) PIPELINE_READS_BASE: input reads base - will look for sequence reads under PIPELINE_READS_BASE/team/project/
     11) PIPELINE_RESULTS_BASE: results base - will store results under PIPELINE_RESULTS_BASE/team/project/runID/
 
-Output: PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/pipeline.cfg 
+Output: 
+  1) PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/pipeline.cfg 
+  2) PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/logs/gen_config.sh.log
 
 Assumptions:
 
