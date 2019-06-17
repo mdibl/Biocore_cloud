@@ -61,8 +61,8 @@ The main repository is **biocore_cloud** and has the following structure:
 - docs/		
 - [images/](#images-sub-directory)	
 - [src/](#scripts-sub-directory)
-  - [The Experiment-level Congig file generator: src/shell/gen_config.sh](#the-experiment-level-config-file-generator)
-  - [Sample-specific json file generator: src/pyhton/json_generator.py](#sample-specific-json-file-generator)
+  - [The Experiment-level Congig file generator](#the-experiment-level-config-file-generator)
+  - [Sample-specific json file generator](#sample-specific-json-file-generator)
 
 We install this git repository locally under 
 
