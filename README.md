@@ -152,7 +152,7 @@ Assumptions:
 ```
 - What it does: 
 
-The tool generates sample-specific json files for a given experiment. It uses the json template
+The tool generates sample-specific json files for a given experiment runID. It uses the json template
 in addition to the project config file to generate sample-specific json files.
 It gets project global environment variables from the path2project_runID_main_config/cfgs/pipeline.cfg.
 Variables of interest for this step:
@@ -162,7 +162,6 @@ Variables of interest for this step:
   3)PATH2_JSON_FILES
   4)DESIGN_FILE  
   5)READS_BASE
-
 
 - Usage - either:
  * On the Command :  ./json_generator.py [-h] -c path2project_runID_main_config/cfgs/pipeline.cfg 
