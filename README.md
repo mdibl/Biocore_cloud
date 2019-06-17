@@ -103,7 +103,7 @@ There are three main parts in running the pipeline on the Biocore environment.
 
 generates the main config file(pipeline.cfg) for this project runID. This main config file sets global environment variables specific to this runID and used by different downstream processes. The generated config file is stored under PIPELINE_RESULTS_BASE/PROJECT_TEAM_NAME/PROJECT_NAME/runID/cfgs/
 
-- Can be ran Either:
+- Usage - either:
  * On the Command :  ./gen_config.sh  PIPELINE_OWNER PROJECT_TEAM_NAME \
           PROJECT_NAME ORGANISM  REF_DATABASE REF_DATABASE_VERSION \ 
          CWL_SCRIPT PIPELINE_PCF_BASE PIPELINE_JSON_BASE \
