@@ -61,8 +61,8 @@ The main repository is **biocore_cloud** and has the following structure:
 - docs/		
 - [images/](#images-sub-directory)	
 - [src/](#scripts-sub-directory)
-  - [Sample-specific json file generator: src/shell/gen_config.sh](#the-experiment-level-config-file-Generator)
-  - [The Experiment-level Congig file generator: src/pyhton/json_generator.py](#the-experiment-level-config-file-Generator)
+  - [The Experiment-level Congig file generator: src/shell/gen_config.sh](#the-experiment-level-config-file-generator)
+  - [Sample-specific json file generator: src/pyhton/json_generator.py](#sample-specific-json-file-generator)
 
 We install this git repository locally under 
 
@@ -96,7 +96,7 @@ There are three main parts in running the pipeline on the Biocore environment.
 - Generating sample-specific json and pcf files
 - Triggering pipeline nuns 
 
-#### The experiment-level  config file Generator
+#### The experiment-level config file Generator
 
 - **Script:  src/shell/gen_config.sh**
 ```
