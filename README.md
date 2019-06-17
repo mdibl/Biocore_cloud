@@ -60,7 +60,7 @@ The main repository is **biocore_cloud** and has the following structure:
 - [cfgs/ ](#config-files-sub-directory)		
 - docs/		
 - [images/](#images-sub-directory)	
-- src/
+- [src/](#scripts-sub-directory)
 
 We install this git repository locally under 
 
@@ -86,9 +86,9 @@ Others:
 ### Images Sub-directory
 * **images/**  -- static images of the different associated processes
 
-### Scripts 
+### Scripts Sub-directory
 
-There are three main parts in running the pipeline in Biocore environment.
+There are three main parts in running the pipeline on the Biocore environment.
 
 - Generating the experiment-level config file (pipeline.cfg)
 - Generating sample-specific json and pcf files
