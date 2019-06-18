@@ -65,26 +65,44 @@ fi
 source ${PIPELINE_CONFIG_FILE}
 source ${CWL_OPTIONS_CONFIG}
 
-echo "$PATH2_JSON_FILES"
-echo "$DESIGN_FILE"
+## 
+log=$LOG_BASE/$script_name.log
+[ -f $log ] && rm -f $log
+touch $log
 
+ echo ""|tee -a $log
+ echo "************************************************************************" | tee -a $log
+ echo "*      Sample PCF File Generator                   "| tee -a $log
+ echo "*                                                  "| tee -a $log
+ echo "*      Project Team: $PROJECT_TEAM_NAME            "| tee -a $log
+ echo "*      Project Name: $PROJECT_NAME                 "| tee -a $log
+ echo "*      Organism:       $ORGANISM                   "| tee -a $log
+ echo "*      Design File:  $DESIGN_FILE                  "| tee -a $log
+ echo "*      Date:  `date`                  "| tee -a $log
+ echo "*      Current User: `id -un`                  "| tee -a $log
+ echo "*      Pipeline Owner: ${PIPELINE_OWNER}                 "| tee -a $log
+ echo "************************************************************************" | tee -a $log
+ echo ""| tee -a $log
+
+git_base=""
 ##DO some QC
 # 1) Check CWL_SCRIPT exists
  if [ ! -f $CWL_SCRIPT ]
  then
-    echo "WARNING: CWL script missing - $CWL_SCRIPT"
+    echo "WARNING: CWL script missing - $CWL_SCRIPT" | tee -a $log
     #exit 1
  fi
 function gen_metafile(){
     #
     #Create the meta script config file
-     echo "********.  Processing $sample_id *****************"
+     echo "*************************"  | tee -a $log
+     echo "Sample ID: $sample_id"  | tee -a $log
      JSON_FILE=$PATH2_JSON_FILES/$sample_id.$ORGANISM.json
      ##DO some QC
      # 1) Check son file  exists 
      if [ ! -f $JSON_FILE ]
      then
-        echo "WARNING: JSON file missing - $JSON_FILE"
+        echo "WARNING: JSON file missing - $JSON_FILE"  | tee -a $log
         #exit 1
      fi
      [ ! -d $PIPELINE_META_BASE ] && mkdir -p $PIPELINE_META_BASE
@@ -113,13 +131,20 @@ function gen_metafile(){
      echo "#" >> ${PIPELINE_METADATA_SCRIPT}
      echo "RESULTS_DIR=${RESULTS_DIR}" >> ${PIPELINE_METADATA_SCRIPT}
      echo "#" >> ${PIPELINE_METADATA_SCRIPT}
+     echo "Sample PCF file: ${PIPELINE_METADATA_SCRIPT}"| tee -a $log
 }
 
 if [ -z "$SAMPLE_ID" ]
 then
+  token="sample_id"
   for sample_id in ${SAMPLES}
   do
-     gen_metafile $sample_id
+     if [[ $sample_id =~ $token ]]
+     then
+        continue
+     else
+        gen_metafile $sample_id
+     fi
   done
 else
   gen_metafile $SAMPLE_ID
