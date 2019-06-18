@@ -63,6 +63,7 @@ The main repository is **biocore_cloud** and has the following structure:
 - [src/](#scripts-sub-directory)
   - [The Experiment-level Congig file generator](#the-experiment-level-config-file-generator)
   - [Sample-specific json file generator](#sample-specific-json-file-generator)
+  - [Sample-specific pcf file generator](#sample-specific-pcf-file-generator)
 
 We install this git repository locally under 
 
@@ -198,6 +199,30 @@ Assumptions:
        2) The json template has been generated in the same directory as the pipeline.cfg file
 
 ```
+
+### Sample-specific pcf file Generator
+
+- **Script:  src/shell/gen_pcf.sh**
+```
+
+- What It Does: 
+    generates a pcf file for each sample listed in the design file. If the sampleID is specified, 
+    then only the pcf file for that sample is generated.
+
+- Usage - either:
+ * On the Command :  ./gen_pcf.sh path2runID/cfgs/pipeline.cfg [sampleID]
+
+ *  Or Using Jenkins GUI
+    ** Log onto to Jenkins 
+    ** Run  the job Cwl_Workflows => cwl_workflows => generate-configs => generate-pipeline-pcf
+       by clicking on “Build with parameters”
+ 
+ * Where:
+     path2runID/cfgs/pipeline.cfg:  Required - is the full path to this pipeline config file.
+     sampleID:  Optional - is the sample Id as found in the experiment design file.
+                Default, generates a pcf file for each sample listed in the design file.  
+```
+
 ## Appendix 
 
 1) https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html
