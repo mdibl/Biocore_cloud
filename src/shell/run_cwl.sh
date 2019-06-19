@@ -23,7 +23,7 @@ CWL_COMMAND_OPTIONS="--no-container --debug  --timestamps"
 
 [ ! -z "$3" ] && CWL_COMMAND_OPTIONS=$3
 
-if [[ -z "${PIPELINE_CONFIG_FILE}" || ! -f ${PIPELINE_CONFIG_FILE} || -z "$sample_id"  ]]
+if [[ -z "${PIPELINE_CONFIG_FILE}" || ! -f ${PIPELINE_CONFIG_FILE} || -z "$sample_id" ]]
 then
    echo ""
    echo "****************************************************"
@@ -131,14 +131,14 @@ chmod 775 $sample_results_dir
 ## Run the command under $results_dir
 cd $sample_results_dir
 #Command Line
-CMD="$CWLTOOL $CWL_COMMAND_OPTIONS ${CWL_SCRIPT} ${JSON_FILE} 2>&1"
+CMD="$CWLTOOL $CWL_COMMAND_OPTIONS ${CWL_SCRIPT} ${JSON_FILE} "
 echo "" 
 echo "Command Line: $CMD" | tee -a $log
 echo "" 
 echo "************************************************************************" | tee -a $log
 echo ">>> CWLTOOL Logs start here "
 
-$CMD | tee -a $log
+$CMD | tee -a $log  2>&1
 
 #
 echo ">>> CWLTOOL Logs end here " | tee -a ${log}
