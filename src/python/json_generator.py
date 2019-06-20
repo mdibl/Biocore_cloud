@@ -187,6 +187,7 @@ if __name__== "__main__":
         sys.exit()
     ## get list of reads file names
     reads=[f for f in os.listdir(project_env["READS_BASE"]) if isfile(join(project_env["READS_BASE"],f))] 
+    print reads
     json_obj=None
     with open(json_template) as f:
         json_obj=json.load(f)
@@ -209,6 +210,8 @@ if __name__== "__main__":
             for line in f.readlines():
                 if "Sample" in line:continue
                 if "sample_id" in line:continue
+                #Remove leading and trailing whitespace from line
+                line=line.strip()
                 fields=line.split('\t')
                 sample=SampleDOM(fields[0],reads,reads_suffix)
                 read_file_format='sampleID[delimiter]readID[delimiter][...]suffix'
@@ -216,7 +219,7 @@ if __name__== "__main__":
                 log.write("SampleID:%s\n"%(sample.id))
                 log.write("Number of Reads:%d\n"%(len(sample.reads)))
                 if len(sample.reads)<=0:
-                    log.write("ERROR: Bad read files name - expected format - %s"%(read_file_format))
+                    log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
                     bad_format=True
                     continue
                 read1=join(project_env["READS_BASE"],sample.get_read_file("1"))
