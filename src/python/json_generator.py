@@ -213,7 +213,7 @@ if __name__== "__main__":
                 #Remove leading and trailing whitespace from line
                 line=line.strip()
                 fields=line.split('\t')
-                sample=SampleDOM(fields[0],reads,reads_suffix)
+                sample=SampleDOM(fields[0].strip(),reads,reads_suffix)
                 read_file_format='sampleID[delimiter]readID[delimiter][...]suffix'
                 log.write("----------------------------\n")
                 log.write("SampleID:%s\n"%(sample.id))
