@@ -148,6 +148,7 @@ if __name__== "__main__":
     #  3)PATH2_JSON_FILES
     #  4)DESIGN_FILE  
     #  5)READS_BASE
+    #  6)RUN_ID
   
     project_env=loadEnv(pipeline_config)  
     if not project_env["LOG_BASE"]:
@@ -174,6 +175,9 @@ if __name__== "__main__":
     if json_template is None: 
         json_template=project_env["JSON_TEMPLATE"]
     design_file=project_env["DESIGN_FILE"]
+    project_run_id=""
+    if "RUN_ID" in project_env:
+        project_run_id=project_env["RUN_ID"]
 
     if not isdir(json_base_dir):
         print("ERROR: Json files base directory does not exist - see:%s"%(json_base_dir))
@@ -204,6 +208,7 @@ if __name__== "__main__":
     log.write("Json files base directory:%s\n"%(json_base_dir)) 
     log.write("Experiment Design File:%s\n"%(design_file))
     bad_format=False
+    json_obj["project_run_id"]=project_run_id
 
     with open(design_file,'r') as f:
         try:
