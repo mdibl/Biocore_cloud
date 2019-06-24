@@ -169,6 +169,8 @@ done
 echo "">>$pipeline_cfg_file
 echo "## Set path to results">>$pipeline_cfg_file
 echo "export RESULTS_DIR=$RESULTS_DIR">>$pipeline_cfg_file
+echo "## Track the current runID">>$pipeline_cfg_file
+echo "export RUN_ID=$current_timestamp">>$pipeline_cfg_file
 echo "## Path to logs">>$pipeline_cfg_file
 echo "export LOG_BASE=$logs_base">>$pipeline_cfg_file
 echo "## Path to json template and pipeline.cfg">>$pipeline_cfg_file
