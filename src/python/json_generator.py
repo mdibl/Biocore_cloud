@@ -77,20 +77,27 @@ class SampleDOM:
             # Map step
             #   Create a list of string tokens using one string(read_file)
             ##  we want our regular expression to capture both "_" and non-alphanumeric characters
-            tokens=re.split(r'[\W+|_]',self.reads[0])
-            # Create a dictionary with read_file:read_file.tokens  key:value pair
-            reads={}
-            for read_file in self.reads:reads[read_file]=re.split(r'[\W+|_]',read_file)
-            # Reduction step - reduce each dict>value using string tokens
-            for token in tokens:
-                if token in read_number: continue
-                for read_file in reads:
-                    if token in reads[read_file]:reads[read_file].remove(token)
-            # Assembly and quantification step
+            try:
+                tokens=re.split(r'[\W+|_]',self.reads[0])
+                ##Based on our standars readID is field#2 in the name
+                read_id=tokens[1]
+                if read_id.startswith("R"):read_number="R"+read_number
+                # Create a dictionary with read_file:read_file.tokens  key:value pair
+                reads={}
+                for read_file in self.reads:reads[read_file]=re.split(r'[\W+|_]',read_file)
+                # Reduction step - reduce each dict>value using string tokens
+                for token in tokens:
+                    #token=token.replace("R","")
+                    if token in read_number: continue
+                    for read_file in reads:
+                        if token in reads[read_file]:reads[read_file].remove(token)
+                # Assembly and quantification step
+            except:raise
             read_file=None
             for read in reads:
                 if read_number in reads[read]:read_file=read
             return read_file
+
 ## Get global environment variables
 ## setting  from this project runID main config file 
 def loadEnv(config_file):
@@ -227,6 +234,8 @@ if __name__== "__main__":
                     log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
                     bad_format=True
                     continue
+                print sample.reads
+                print project_env["READS_BASE"]
                 read1=join(project_env["READS_BASE"],sample.get_read_file("1"))
                 read2=None
                 sample_json_obj=json_obj
