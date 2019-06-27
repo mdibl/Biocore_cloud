@@ -65,7 +65,7 @@ class SampleDOM:
                 if read_file.startswith(self.id) and read_file.endswith(reads_suffix):
                     self.reads.append(read_file)
     
-    def get_read_file(self,read_number):
+    def get_read_file(self,sampleID,read_number):
         # Logic:
         # if the len of sample_reads array is one, return the first element
         # else:
@@ -78,13 +78,16 @@ class SampleDOM:
             #   Create a list of string tokens using one string(read_file)
             ##  we want our regular expression to capture both "_" and non-alphanumeric characters
             try:
-                tokens=re.split(r'[\W+|_]',self.reads[0])
+                token_file=self.reads[0].replace(sampleID,"sample")
+                tokens=re.split(r'[\W+|_]',token_file)
                 ##Based on our standars readID is field#2 in the name
                 read_id=tokens[1]
                 if read_id.startswith("R"):read_number="R"+read_number
                 # Create a dictionary with read_file:read_file.tokens  key:value pair
                 reads={}
-                for read_file in self.reads:reads[read_file]=re.split(r'[\W+|_]',read_file)
+                for read_file in self.reads:
+                    token_file=read_file.replace(sampleID,"sample")
+                    reads[read_file]=re.split(r'[\W+|_]',token_file)
                 # Reduction step - reduce each dict>value using string tokens
                 for token in tokens:
                     #token=token.replace("R","")
@@ -236,12 +239,12 @@ if __name__== "__main__":
                     continue
                 print sample.reads
                 print project_env["READS_BASE"]
-                read1=join(project_env["READS_BASE"],sample.get_read_file("1"))
+                read1=join(project_env["READS_BASE"],sample.get_read_file(sample.id,"1"))
                 read2=None
                 sample_json_obj=json_obj
                 sample_json_file=join(json_base_dir,sample.id+"."+project_env["ORGANISM"]+".json")
                 sample_json_obj["input_fastq_read1_files"][0]["path"]=read1
-                if len(sample.reads)>1:read2=join(project_env["READS_BASE"],sample.get_read_file("2"))
+                if len(sample.reads)>1:read2=join(project_env["READS_BASE"],sample.get_read_file(sample.id,"2"))
                 log.write("  READ1:%s\n"%(read1))
                 if read2 is not None:
                     log.write("  READ2:%s\n"%(read2))
