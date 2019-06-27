@@ -90,7 +90,6 @@ class SampleDOM:
                     reads[read_file]=re.split(r'[\W+|_]',token_file)
                 # Reduction step - reduce each dict>value using string tokens
                 for token in tokens:
-                    #token=token.replace("R","")
                     if token in read_number: continue
                     for read_file in reads:
                         if token in reads[read_file]:reads[read_file].remove(token)
