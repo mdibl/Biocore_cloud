@@ -55,7 +55,7 @@ fi
 ##############
 #
 #Tokens used to check the run status
-ERROR_TERMS="ERROR error failed"
+ERROR_TERMS="ERROR error failed permanentFail"
 ###############
 LOG_BASE=$RESULTS_DIR/logs
 [ ! -d $LOG_BASE ] && mkdir -p $LOG_BASE
