@@ -31,8 +31,9 @@ then
   echo "***********************************************"
   echo "Bad usage ---"
   echo "Usage: ./$SCRIPT_NAME  LOCAL_DIR REMOTE_DIR"
-  echo "Example1: ./$SCRIPT_NAME  /opt/software /opt/software"
-  echo ""
+  echo "Example1: ./$SCRIPT_NAME  /opt/software/external/ggr /opt/software/external/"
+  echo "This example copies recursively the ggr local directory and its content "
+  echo : under the aws efs  /opt/software/external/ "
   echo "***********************************************"
   echo ""
   exit 1
