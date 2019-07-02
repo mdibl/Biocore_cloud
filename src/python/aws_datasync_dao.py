@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Defines operation on AwsDataSyncDOM object.
+This class will be used by data migration services.
 
 Returns:
      Sets global  
