@@ -7,16 +7,18 @@ Returns:
 Raises:
      Nothing
 AwsDataSyncDOM: Stores AWS datasync connection object
-BiocoreInfoDOM: Stores biocore info directories map
 
 Organization: MDIBL
 Author: Lucie N. Hutchins
 Contact: lucie.hutchins@mdibl.org
 Date: May 2019
+Modified: July 2019
 
 """
 import subprocess as sp
+from os.path import isdir,join,isfile
 import json
+import  global_m as gb_m
 
 class AwsDataSyncDOM:
     def __init__(self):
@@ -118,7 +120,11 @@ class AwsDataSyncDOM:
         return sp.Popen("aws datasync delete-location --location-arn "+location_arn,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
     ##
     # Create location
-    #def create_efs_location(self,subdirectory):
+    def create_efs_location(self,subdir,filesystem_arn):
+        cmd="aws datasync create-location-efs --subdirectory "+subdir+" --efs-filesystem-arn "+filesystem_arn
+        cmd+=" --ec2-config "+self.get_ec2_config()
+        return sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
+
     #def create_nfs_location(self,):
     #def create_s3_location(self,):
     ##
@@ -127,7 +133,8 @@ class AwsDataSyncDOM:
     """
     """
     def get_task(self,task_arn):
-         return json.loads(sp.Popen("aws datasync describe-task --task-arn "+task_arn,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read())
+         cmd="aws datasync describe-task --task-arn "+task_arn
+         return json.loads(sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read())
     ##
     # get current tasks - task.TaskArn, task.Status, task.Name
     def get_tasks(self):
@@ -139,28 +146,20 @@ class AwsDataSyncDOM:
         except:pass
         return tasks
 
-class BiocoreInfoDOM:
-    def __init__(self):
-        self.external_data=None    #Where we store downloaded data
-        self.internal_data=None    #Where we store internal data
-        self.external_software=None    #Where we store downloaded packages
-        self.internal_software=None    #Where we store internal packages
-        self.scratch=None          #Working space
-        self.transformed=None      #Where we store tools' generated indexes
-        self.projects=None    #Completed projects space
+    def delete_task(self,task_arn):
+        return sp.Popen("aws datasync delete-task --task-arn "+task_arn,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
 
-    def set_external_data(self,ext_data_dir):
-        self.external_data=ext_data_dir
-    def set_internal_data(self,int_data_dir):
-        self.internal_data=int_data_dir
-    def set_external_software(self,ext_soft_dir):
-        self.external_software=ext_soft_dir
-    def set_internal_software(self,int_soft_dir):
-        self.internal_software=int_soft_dir
-    def set_scratch(self,scratch_dir):
-        self.scratch=scratch_dir
-    def set_transformed(self,transformed_dir):
-        self.transformed=transformed_dir 
-    def set_projects(self,projects_dir):
-        self.projects=projects_dir
+    def create_task(self,src_loc_arn,dest_loc_arn):
+        datasync_cmd="aws datasync create-task --source-location-arn "+src_loc_arn+" --destination-location-arn "+dest_loc_arn
+        return sp.Popen(datasync_cmd ,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
 
+    def start_task_execution(self,task_arn):
+         cmd="aws datasync start-task-execution --task-arn "+task_arn
+         return sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read() 
+
+    #### S3 sync
+    def s3_sync(self,source_dir,destination_dir,include_file=None):
+        include_token=""
+        if include_file is not None:include_token=" --include "+include_file
+        cmd="aws s3 sync "+source_dir+" "+destination_dir+include_token
+        return sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
