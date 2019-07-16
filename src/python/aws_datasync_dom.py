@@ -170,8 +170,13 @@ class AwsDataSyncDOM:
     """
     """
     def get_task(self,task_arn):
-         cmd="aws datasync describe-task --task-arn "+task_arn
-         return json.loads(sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read())
+        cmd="aws datasync describe-task --task-arn "+task_arn
+        return json.loads(sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read())
+
+    #https://docs.aws.amazon.com/datasync/latest/userguide/monitor-task-execution.html
+    def get_task_execution(self,task_execution_arn):
+        cmd="aws datasync describe-task-execution --task-execution-arn "+task_execution_arn
+        return json.loads(sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read())
     ##
     # get current tasks - task.TaskArn, task.Status, task.Name
     def get_tasks(self):
