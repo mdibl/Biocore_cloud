@@ -127,23 +127,24 @@ if __name__== "__main__":
                 task_status=current_tasks[task_name]["status"]
                 if "AVAILABLE" in task_status:
                     status=datasync_obj.start_task_execution(task_arn)
-                    running_tasks.append(task_arn)
-                    log.write("Task status:%s\n"%(status))
+                    running_tasks.append(status["TaskExecutionArn"])
+                    log.write("Task status:%s\n"%(task_status))
+                    log.write("Task Execution ARN:%s\n"%(status))
                 else:
                     log.write("Task status:%s\n"%(task_status))
             else:log.write("Task status: error - Not found \n")
-        ## Now wait for running tasks to complete.
-        #Task Execution Statuses : see - https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-execution-statuses.html
+        ## Now monitor running tasks to completion.
+        ## See: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-task-execution.html
+        #Task Execution Statuses : 
+        ## see - https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-execution-statuses.html
         task_execution_states=["LAUNCHING","PREPARING","TRANSFERRING","VERIFYING"]
         while True:
-            task_running={}
-            for task_arn in running_tasks:
-                task_obj=datasync_obj.get_task(task_arn) 
-                if task_obj["Status"] in task_execution_states:
-                    task_running[task_obj["Name"]]=task_obj["TaskArn"]
-            print("\n****************************************\nTotal migration tasks running:%d\n"%(len(task_running)))
-            for task_name,task_arn in task_running.items():
-                print("Task: %s  - TaskARN:%s\n"%(task_name,task_arn))
+            task_running=[]
+            for task_execution_arn in running_tasks:
+                task_exec_obj=datasync_obj.get_task_execution(task_execution_arn) 
+                if task_exec_obj["Status"] in task_execution_states:
+                    task_running.append(task_exec_obj["TaskExecutionArn"])
+            print("\n****************************************\nTotal migration tasks running: %d\n"%(len(task_running)))
             if len(task_running)<=0:break
             else:sleep(120) ## Check running tasks once every two minutes  
     except:raise
