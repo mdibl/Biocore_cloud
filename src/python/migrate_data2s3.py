@@ -123,7 +123,7 @@ if __name__== "__main__":
     log.write("    Json Template : %s\n"%(biocore_obj.json_template))
     log.write("Log file:%s\n"%(log_file))
     log.write("\n")
-
+    done_list=[]
     for biocore_path,s3_path in biocore_obj.s3_biocore_items_map.items():
         ##remove trailing back slash from path
         if biocore_path.endswith("/"):biocore_path=biocore_path[:-1]
@@ -139,19 +139,22 @@ if __name__== "__main__":
         transfer_label=target_token
         if transfer_label is None: transfer_label=basename(biocore_path)
         s3_uri=s3_dir_base.replace(biocore_obj.biocore_s3_data_base, biocore_obj.biocore_s3_data_uri)
+        if s3_uri in done_list: continue
         log.write("----------------------------\n")
         log.write("Transferring : %s \n"%(transfer_label))
         log.write("Source: %s\nDestination: %s\nS3 URI: %s\n"%(source_base,s3_dir_base,s3_uri))
         log.write("Transfer started:%s\n"%( datetime.now()))
         cmd="aws s3 sync "+source_base+" "+s3_uri
-        if target_token is not None:
-            cmd+=" --include "+target_token
-            log_console=datasync_obj.s3_sync(source_base,s3_uri,target_token)
-        else:
-            log_console=datasync_obj.s3_sync(source_base,s3_uri)
+        #if target_token is not None:
+        #    cmd+=" --include "+target_token
+        #    log_console=datasync_obj.s3_sync(source_base,s3_uri,target_token)
+        #else:
+        #    log_console=datasync_obj.s3_sync(source_base,s3_uri)
+        log_console=datasync_obj.s3_sync(source_base,s3_uri)
         print("Migrating: %s\nCMD:%s\n"%(transfer_label,cmd))
         log.write("Transfer logs:\n%s\n"%(log_console))
         log.write("Transfer ended:%s\n"%( datetime.now()))
+        done_list.append(s3_uri)
     log.write("Program complete\n")
     print("Program complete.\nCheck the logs:\n%s\n"%(log_file))
     sys.exit()
