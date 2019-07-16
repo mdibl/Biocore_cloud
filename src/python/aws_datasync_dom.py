@@ -187,6 +187,7 @@ class AwsDataSyncDOM:
         except:raise
         return tasks
 
+    
     def delete_task(self,task_arn):
         return sp.Popen("aws datasync delete-task --task-arn "+task_arn,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
 

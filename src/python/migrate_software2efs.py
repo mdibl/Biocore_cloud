@@ -8,6 +8,8 @@ from biocore_project_dom import BiocoreProjectInfoDOM
 import  global_m as gb_m
 from  aws_datasync_dom import AwsDataSyncDOM
 
+from time import sleep
+
 '''
 Organization: MDIBL
 Author: Lucie N. Hutchins
@@ -113,6 +115,7 @@ if __name__== "__main__":
         ## Create tasks for specified datasync locations as needed
         software_tasks=datasync_obj.create_software_tasks(biocore_obj.biocore_software_base,datasync_locations)
         ##get tasks status
+        running_tasks=[]
         current_tasks=datasync_obj.get_tasks()
         for task_name,task in software_tasks.items():
             log.write("----------------------------\n")
@@ -124,10 +127,25 @@ if __name__== "__main__":
                 task_status=current_tasks[task_name]["status"]
                 if "AVAILABLE" in task_status:
                     status=datasync_obj.start_task_execution(task_arn)
+                    running_tasks.append(task_arn)
                     log.write("Task status:%s\n"%(status))
                 else:
                     log.write("Task status:%s\n"%(task_status))
             else:log.write("Task status: error - Not found \n")
+        ## Now wait for running tasks to complete.
+        #Task Execution Statuses : see - https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-execution-statuses.html
+        task_execution_states=["LAUNCHING","PREPARING","TRANSFERRING","VERIFYING"]
+        while True:
+            task_running={}
+            for task_arn in running_tasks:
+                task_obj=datasync_obj.get_task(task_arn) 
+                if task_obj["Status"] in task_execution_states:
+                    task_running[task_obj["Name"]]=task_obj["TaskArn"]
+            print("\n****************************************\nTotal migration tasks running:%d\n"%(len(task_running)))
+            for task_name,task_arn in task_running.items():
+                print("Task: %s  - TaskARN:%s\n"%(task_name,task_arn))
+            if len(task_running)<=0:break
+            else:sleep(120) ## Check running tasks once every two minutes  
     except:raise
     log.write("Program complete\n")
     print("Program complete.\nCheck the logs:\n%s\n"%(log_file))
