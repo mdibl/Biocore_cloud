@@ -115,38 +115,63 @@ if __name__== "__main__":
         ## Create tasks for specified datasync locations as needed
         software_tasks=datasync_obj.create_software_tasks(biocore_obj.biocore_software_base,datasync_locations)
         ##get tasks status
-        running_tasks=[]
+        running_tasks={}
         current_tasks=datasync_obj.get_tasks()
         for task_name,task in software_tasks.items():
             log.write("----------------------------\n")
+            print("----------------------------\n")
             log.write("Transfer started:%s\n"%( datetime.now()))
+            print("Transfer started:%s\n"%( datetime.now()))
             task_arn=task["TaskARN"]
             for label,value in task.items():
                 log.write("%s:%s\n"%( label,value))
+                print("%s:%s\n"%( label,value))
             if task_name in current_tasks:
                 task_status=current_tasks[task_name]["status"]
                 if "AVAILABLE" in task_status:
-                    status=datasync_obj.start_task_execution(task_arn)
-                    running_tasks.append(status["TaskExecutionArn"])
+                    exec_status=datasync_obj.start_task_execution(task_arn)
+                    running_tasks[task_arn]=task_name
                     log.write("Task status:%s\n"%(task_status))
-                    log.write("Task Execution ARN:%s\n"%(status))
-                else:
+                    print("Task status:%s\n"%(task_status))
+                    log.write("Task Execution ARN:%s\n"%(exec_status))
+                elif "RUNNING" in task_status:
+                    running_tasks[task_arn]=task_name
                     log.write("Task status:%s\n"%(task_status))
-            else:log.write("Task status: error - Not found \n")
+                    print("Task status:%s\n"%(task_status))
+            else:
+                log.write("Task status: error - Not found \n")
+                print("Task status: error - Not found \n")
         ## Now monitor running tasks to completion.
         ## See: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-task-execution.html
         #Task Execution Statuses : 
         ## see - https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-execution-statuses.html
         task_execution_states=["LAUNCHING","PREPARING","TRANSFERRING","VERIFYING"]
+        sleep(20)
+        log.write("******************************\n")
+        log.write("******************************\n")
+        log.write("Monitoring Software migration tasks\n")
+        log.write("----------------------------\n")
+        print("******************************\n")
+        print("******************************\n")
+        print("Monitoring Software migration tasks\n")
+        print("----------------------------\n")
         while True:
             task_running=[]
-            for task_execution_arn in running_tasks:
-                task_exec_obj=datasync_obj.get_task_execution(task_execution_arn) 
-                if task_exec_obj["Status"] in task_execution_states:
-                    task_running.append(task_exec_obj["TaskExecutionArn"])
-            print("\n****************************************\nTotal migration tasks running: %d\n"%(len(task_running)))
-            if len(task_running)<=0:break
-            else:sleep(120) ## Check running tasks once every two minutes  
+            tasks_name=[]
+            current_tasks=datasync_obj.get_tasks()
+            for task_arn,task_name in running_tasks.items():
+                if task_name in current_tasks:
+                   task_status=current_tasks[task_name]["status"]
+                if "RUNNING" in task_status:
+                    task_running.append(task_arn)
+                    tasks_name.append(task_name)
+            all_running_task=len(task_running)
+            log.write("\n****************************************\nTotal migration tasks running: %d"%(all_running_task))
+            log.write("\nTasks:  %s"%(",".join(tasks_name)))
+            print("\n****************************************\nTotal migration tasks running: %d\n"%(all_running_task))
+            print("\nTasks:  %s"%(",".join(tasks_name)))
+            if all_running_task <=0:break
+            else:sleep(30) ## Check running tasks once every thirty seconds  
     except:raise
     log.write("Program complete\n")
     print("Program complete.\nCheck the logs:\n%s\n"%(log_file))
