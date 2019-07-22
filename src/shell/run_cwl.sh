@@ -62,6 +62,10 @@ LOG_BASE=$RESULTS_DIR/logs
 ## 
 json_filename=`basename ${JSON_FILE}`
 sample_name=$(echo $json_filename  | cut -d'.' -f 1)
+## Assumption run_id follows our naming standards: pixxx.timestamp
+run_id=`basename $RESULTS_DIR`
+timestamp_id=$(echo $run_id | cut -d'.' -f 2)
+
 log=$LOG_BASE/$script_name.$sample_name.log
 [ -f $log ] && rm -f $log
 touch $log
