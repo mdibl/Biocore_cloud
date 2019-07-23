@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import join,isfile,isdir,basename
+from os.path import join,isfile,isdir,dirname,basename
 import getopt,os,sys,re
 import io,json
 import subprocess as sp
@@ -98,7 +98,7 @@ class SampleDOM:
             read_file=None
             for read in reads:
                 if read_number in reads[read]:read_file=read
-            return read_file
+            return read_file.replace(".gz","")
 
 ## Get global environment variables
 ## setting  from this project runID main config file 
@@ -168,11 +168,8 @@ if __name__== "__main__":
         print("ERROR: Json files base directory missing - see:%s"%(project_env["PATH2_JSON_FILES"]))
         print("create the above directory and try again.")
         sys.exit()
-    if not project_env["READS_BASE"]:
-        print("ERROR: Path to Reads files is incorrect - see:%s"%(project_env["READS_BASE"]))
-        sys.exit()
-    if not isdir(project_env["READS_BASE"]):
-        print("ERROR: Path to Reads files not a directory - see:%s"%(project_env["READS_BASE"]))
+    if not project_env["ORIGINAL_READS_BASE"]:
+        print("ERROR: Path to Reads files is incorrect - see:%s"%(project_env["ORIGINAL_READS_BASE"]))
         sys.exit()
 
     if not isdir(project_env["LOG_BASE"]):
@@ -199,7 +196,8 @@ if __name__== "__main__":
         print("ERROR: Json template file is  missing - see:%s"%(json_template))
         sys.exit()
     ## get list of reads file names
-    reads=[f for f in os.listdir(project_env["READS_BASE"]) if isfile(join(project_env["READS_BASE"],f))] 
+    reads_base=project_env["ORIGINAL_READS_BASE"]
+    reads=[f for f in os.listdir(reads_base) if isfile(join(reads_base,f))] 
     print reads
     json_obj=None
     with open(json_template) as f:
@@ -236,7 +234,6 @@ if __name__== "__main__":
                     log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
                     bad_format=True
                     continue
-                print sample.reads
                 print project_env["READS_BASE"]
                 read1=join(project_env["READS_BASE"],sample.get_read_file(sample.id,"1"))
                 read2=None
