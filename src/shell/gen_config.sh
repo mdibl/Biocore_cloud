@@ -40,11 +40,11 @@ PCF_PROJECT_BASE=$PCF_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timesta
 # flename format sampleID.organism.json
 JSON_BASE=$9
 JSON_PROJECT_BASE=$JSON_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timestamp
-results_base=${11}
+results_base=${10}
 RESULTS_DIR_BASE=$results_base/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 RESULTS_DIR=${RESULTS_DIR_BASE}/$current_timestamp
 
-READS_BASE=${10}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/reads
+READS_BASE=${RESULTS_DIR_BASE}/reads
 
 if [[ -z "$results_base" || ! -d $results_base ]]
 then
@@ -113,11 +113,6 @@ fi
 if [ ! -f $cfgs_dir/biocore.cfg ]
 then
    echo "ERROR: Missing biocore.cfg under $cfgs_dir"
-   exit 1
-fi
-if [ ! -d $READS_BASE ]
-then
-   echo "ERROR: Invalid path to sequence reads - $READS_BASE"
    exit 1
 fi
 [ ! -d $logs_base ] && mkdir -p $logs_base
@@ -201,6 +196,7 @@ echo "## Reference dataset used to generate indexes">>$pipeline_cfg_file
 echo "export REF_DATASET=$REF_DATASET">>$pipeline_cfg_file
 echo "">>$pipeline_cfg_file
 echo "## Setup path sample reads and design file ">>$pipeline_cfg_file
+echo "export ORIGINAL_READS_BASE=${ORIGINAL_READS_BASE}">>$pipeline_cfg_file
 echo "export READS_BASE=${READS_BASE}">>$pipeline_cfg_file
 echo "export DESIGN_FILE=${DESIGN_FILE}">>$pipeline_cfg_file
 echo "">>$pipeline_cfg_file
