@@ -38,7 +38,8 @@ class BiocoreProjectInfoDOM:
         self.project_name=None               #this project name
         self.bicore_pipelinemeta_dir=None    #where the pipeline pcf files are read/stored
         self.bicore_pipelinejson_dir=None    #where the pipeline json files are read/stored
-        self.biocoree_reads_base=None        #where the sequence read files are stored
+        self.project_reads_base=None         #where the original sequence read files are stored
+        self.scratch_reads_base=None          #where the sequence read files are stored on scracth
         self.biocore_index_base=None         #base directory for tool indexes
         self.biocore_log_base=None           #base directory for generated logs - stored by program
         ##Use json template to get
@@ -59,13 +60,15 @@ class BiocoreProjectInfoDOM:
 
     def set_project(self,project_config):
         project_env=gb_m.loadEnv(project_config)
-        if project_env["DESIGN_FILE"]: self.project_design_file=project_env["DESIGN_FILE"]
+        if project_env["DESIGN_FILE"]: 
+            self.project_design_file=project_env["DESIGN_FILE"]
+            self.project_reads_base=dirname(project_env["DESIGN_FILE"])
         if project_env["PROJECT_TEAM_NAME"]: self.project_team_id=project_env["PROJECT_TEAM_NAME"]
         if project_env["PROJECT_NAME"]: self.project_name=project_env["PROJECT_NAME"]
         if project_env["LOG_BASE"]: self.biocore_log_base=project_env["LOG_BASE"]
         if project_env["CWL_SCRIPT"]: self.project_cwl_script=project_env["CWL_SCRIPT"]
         if project_env["RUN_ID"]: self.project_run_id=project_env["RUN_ID"]
-        if project_env["READS_BASE"]:self.biocoree_reads_base=project_env["READS_BASE"]
+        if project_env["READS_BASE"]:self.scratch_reads_base=project_env["READS_BASE"]
         if project_env["PATH2_JSON_FILES"]:self.bicore_pipelinejson_dir=project_env["PATH2_JSON_FILES"]
         if project_env["PIPELINE_META_BASE"]:self.bicore_pipelinemeta_dir=project_env["PIPELINE_META_BASE"]
         if project_env["JSON_TEMPLATE"]:
@@ -111,12 +114,12 @@ class BiocoreProjectInfoDOM:
         return samples
 
     def get_reads(self):
-        reads_base_files=[f for f in listdir(self.biocoree_reads_base) if isfile(join(self.biocoree_reads_base,f))]
+        reads_base_files=[f for f in listdir(self.scratch_reads_base) if isfile(join(self.scratch_reads_base,f))]
         reads=[]
         for sample_id in self.get_samples(): 
-            for file_name in [f for f in listdir(self.biocoree_reads_base) if isfile(join(self.biocoree_reads_base,f))]:
+            for file_name in [f for f in listdir(self.scratch_reads_base) if isfile(join(self.scratch_reads_base,f))]:
                 if file_name.startswith(sample_id):
-                    reads.append(join(self.biocoree_reads_base,file_name))
+                    reads.append(join(self.scratch_reads_base,file_name))
         return reads
      
 
@@ -126,8 +129,7 @@ class BiocoreProjectInfoDOM:
         self.efs_biocore_items_map[self.project_cwl_script]=self.project_cwl_script
         self.s3_biocore_items_map[self.bicore_pipelinemeta_dir]=self.get_s3_path(self.bicore_pipelinemeta_dir)
         self.s3_biocore_items_map[self.bicore_pipelinejson_dir]=self.get_s3_path(self.bicore_pipelinejson_dir)
-        for read_file in self.get_reads():
-            self.s3_biocore_items_map[read_file]=self.get_s3_path(read_file) 
+        self.s3_biocore_items_map[self.project_reads_base]=self.get_s3_path(self.scratch_reads_base)
         ##get additional data transfer candidates from json template used
         for item_name in self.json_template_files+self.json_template_directories:
             cloud_path=self.get_s3_path(item_name)

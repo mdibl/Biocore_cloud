@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import subprocess as sp
 from os.path import join,isfile,isdir,dirname,basename
 import getopt,os,sys,re
 #import io,json
@@ -60,12 +61,62 @@ The program will fail with error if anyone of the project's expected structures 
    '''
     print("%s"%(usage))
 
+## Transfers data from local file system to S3 buckets
+## using S3 sync utilities 
+#
+def transfer_data2s3(biocore_obj,datasync_obj,log):
+    done_list=[]
+    for biocore_path,s3_path in biocore_obj.s3_biocore_items_map.items():
+        ##remove trailing back slash from path
+        if biocore_path.endswith("/"):biocore_path=biocore_path[:-1]
+        if s3_path.endswith("/"):s3_path=s3_path[:-1]
+        target_token=None
+        if isfile(biocore_path):
+           s3_dir_base=dirname(s3_path)
+           source_base=dirname(biocore_path)
+           target_token=basename(biocore_path)
+        else:
+           s3_dir_base=s3_path
+           source_base=biocore_path
+        transfer_label=target_token
+        if transfer_label is None: transfer_label=basename(biocore_path)
+        s3_uri=s3_dir_base.replace(biocore_obj.biocore_s3_data_base, biocore_obj.biocore_s3_data_uri)
+        if s3_uri in done_list: continue
+        log.write("----------------------------\n")
+        log.write("Transferring : %s \n"%(transfer_label))
+        log.write("Source: %s\nDestination: %s\nS3 URI: %s\n"%(source_base,s3_dir_base,s3_uri))
+        log.write("Transfer started:%s\n"%( datetime.now()))
+        cmd="aws s3 sync "+source_base+" "+s3_uri
+        log_console=datasync_obj.s3_sync(source_base,s3_uri)
+        print("Migrating: %s\nCMD:%s\n"%(transfer_label,cmd))
+        log.write("Transfer logs:\n%s\n"%(log_console))
+        log.write("Transfer ended:%s\n"%( datetime.now()))
+        done_list.append(s3_uri)
+
+## Expands sequence read files on S3 stporage as needed
+#
+def expand_reads(s3_reads_path):
+    reads_files=[f for f in os.listdir(s3_reads_path) if isfile(join(s3_reads_path,f))]
+    try:
+        os.chdir(s3_reads_path)
+        for read_file in reads_files:
+            if ".gz" in read_file:
+                log.write("----------------------------\n")
+                log.write("Expanding : %s \n"%(read_file))
+                log.write("Process started:%s\n"%( datetime.now()))
+                cmd="gunzip "+read_file
+                log_console=sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
+                print("Expanding: %s\n"%(read_file))
+                log.write("Process logs:\n%s\n"%(log_console))
+                log.write("Process ended:%s\n"%( datetime.now()))
+    except:pass
+
 if __name__== "__main__":
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hc:", ["help", "cfg="])
     except getopt.GetoptError as err:
         # print help information and exit:
-        print("ERROR:%s" % (str(err) )) # will print something like "option -a not recognized"
+        print("ERROR:%s" % (str(err) )) 
         prog_usage()
         sys.exit(1)
     #set program arguments
@@ -86,18 +137,19 @@ if __name__== "__main__":
   
     biocore_obj=BiocoreProjectInfoDOM(pipeline_config)
     datasync_obj=AwsDataSyncDOM()
+
     if biocore_obj.project_design_file is None or  not isfile(biocore_obj.project_design_file) :
-        print("ERROR: Experiment design file missing - see path:%s"%(biocore_obj.project_design_file))
+        print("ERROR: Exp design file missing - see path:%s"%(biocore_obj.project_design_file))
         sys.exit()
     if biocore_obj.project_cwl_script is None or not isfile(biocore_obj.project_cwl_script):
-        print("ERROR: Experiment cwl script file missing - see path:%s"%(biocore_obj.project_cwl_script))
+        print("ERROR: Exp cwl script file missing - see path:%s"%(biocore_obj.project_cwl_script))
         sys.exit()
     if biocore_obj.json_template is None or not isfile(biocore_obj.json_template):
-        print("ERROR: Experiment json template file(template.json) missing - see path:%s"%(biocore_obj.json_template))
+        print("ERROR: Exp json template file(template.json) missing - see path:%s"%(biocore_obj.json_template))
         sys.exit()
 
-    if not isdir(biocore_obj.biocoree_reads_base):
-        print("ERROR: Path to Reads files not a directory  - see path:%s"%(biocore_obj.biocoree_reads_base))
+    if not isdir(biocore_obj.project_reads_base):
+        print("ERROR: Path to Reads files not a directory  - see path:%s"%(biocore_obj.project_reads_base))
         sys.exit()
     if not isdir(biocore_obj.biocore_log_base):
         print("ERROR: Log directory missing - see:%s"%(biocore_obj.biocore_log_base ))
@@ -123,38 +175,13 @@ if __name__== "__main__":
     log.write("    Json Template : %s\n"%(biocore_obj.json_template))
     log.write("Log file:%s\n"%(log_file))
     log.write("\n")
-    done_list=[]
-    for biocore_path,s3_path in biocore_obj.s3_biocore_items_map.items():
-        ##remove trailing back slash from path
-        if biocore_path.endswith("/"):biocore_path=biocore_path[:-1]
-        if s3_path.endswith("/"):s3_path=s3_path[:-1]
-        target_token=None
-        if isfile(biocore_path):
-           s3_dir_base=dirname(s3_path)
-           source_base=dirname(biocore_path)
-           target_token=basename(biocore_path)
-        else:
-           s3_dir_base=s3_path
-           source_base=biocore_path
-        transfer_label=target_token
-        if transfer_label is None: transfer_label=basename(biocore_path)
-        s3_uri=s3_dir_base.replace(biocore_obj.biocore_s3_data_base, biocore_obj.biocore_s3_data_uri)
-        if s3_uri in done_list: continue
-        log.write("----------------------------\n")
-        log.write("Transferring : %s \n"%(transfer_label))
-        log.write("Source: %s\nDestination: %s\nS3 URI: %s\n"%(source_base,s3_dir_base,s3_uri))
-        log.write("Transfer started:%s\n"%( datetime.now()))
-        cmd="aws s3 sync "+source_base+" "+s3_uri
-        #if target_token is not None:
-        #    cmd+=" --include "+target_token
-        #    log_console=datasync_obj.s3_sync(source_base,s3_uri,target_token)
-        #else:
-        #    log_console=datasync_obj.s3_sync(source_base,s3_uri)
-        log_console=datasync_obj.s3_sync(source_base,s3_uri)
-        print("Migrating: %s\nCMD:%s\n"%(transfer_label,cmd))
-        log.write("Transfer logs:\n%s\n"%(log_console))
-        log.write("Transfer ended:%s\n"%( datetime.now()))
-        done_list.append(s3_uri)
+    ##Transfer data to cloud
+    transfer_data2s3(biocore_obj,datasync_obj,log)
+    ## expand reads files if needed
+    s3_reads_path=biocore_obj.get_s3_path(biocore_obj.scratch_reads_base)
+    if not isdir(s3_reads_path):
+        log.write("ERROR: Invalid path to reads - see %s\n"%(s3_reads_path))
+    else: expand_reads(s3_reads_path)
     log.write("Program complete\n")
-    print("Program complete.\nCheck the logs:\n%s\n"%(log_file))
+    print("Program complete.\nCheck the logs for errors:\n%s\n"%(log_file))
     sys.exit()
