@@ -44,7 +44,7 @@ results_base=${11}
 RESULTS_DIR_BASE=$results_base/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 RESULTS_DIR=${RESULTS_DIR_BASE}/$current_timestamp
 
-READS_BASE=${10}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
+READS_BASE=${10}/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/reads
 
 if [[ -z "$results_base" || ! -d $results_base ]]
 then
