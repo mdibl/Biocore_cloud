@@ -39,7 +39,8 @@ class BiocoreProjectInfoDOM:
         self.bicore_pipelinemeta_dir=None    #where the pipeline pcf files are read/stored
         self.bicore_pipelinejson_dir=None    #where the pipeline json files are read/stored
         self.project_reads_base=None         #where the original sequence read files are stored
-        self.scratch_reads_base=None          #where the sequence read files are stored on scracth
+        self.scratch_reads_base=None         #where the sequence read files are stored on scracth
+        self.project_results_base=None       #where the pipeline results are stored on scracth
         self.biocore_index_base=None         #base directory for tool indexes
         self.biocore_log_base=None           #base directory for generated logs - stored by program
         ##Use json template to get
@@ -58,17 +59,54 @@ class BiocoreProjectInfoDOM:
         self.set_project(project_config)
         self.set_biocore_cloud_items_list()
 
+    ## get list of samples
+    def get_exp_samples(self):
+        samples=[]
+        design_file=self.project_design_file
+        with open(design_file,'r') as f:
+            try:
+                for line in f.readlines():
+                    if "Sample" in line:continue
+                    if "sample_id" in line:continue
+                    #Remove leading and trailing whitespace from line
+                    line=line.strip()
+                    fields=line.split('\t')
+                    ##sample_id is the first field of the array
+                    samples.append(fields[0].strip())
+            except:pass
+        return samples
+
+    #### get list of reads file names
+    def get_reads_list(self,read_suffix):
+        reads_base=self.project_reads_base
+        reads_list={}
+        try:
+            reads=[f for f in listdir(reads_base) if isfile(join(reads_base,f))]
+            samples=self.get_exp_samples()
+            for read in reads:
+                read_file_name=read.strip() 
+                if read_file_name.endswith(read_suffix):
+                    for sample in samples:
+                        if read_file_name.startswith(sample):
+                            if sample not in reads_list: reads_list[sample]=[]
+                            reads_list[sample].append(read_file_name)
+        except:pass
+        return reads_list
+
     def set_project(self,project_config):
         project_env=gb_m.loadEnv(project_config)
         if project_env["DESIGN_FILE"]: 
             self.project_design_file=project_env["DESIGN_FILE"]
             self.project_reads_base=dirname(project_env["DESIGN_FILE"])
+        if "ORIGINAL_READS_BASE" in project_env:
+            self.project_reads_base=project_env["ORIGINAL_READS_BASE"]
         if project_env["PROJECT_TEAM_NAME"]: self.project_team_id=project_env["PROJECT_TEAM_NAME"]
         if project_env["PROJECT_NAME"]: self.project_name=project_env["PROJECT_NAME"]
         if project_env["LOG_BASE"]: self.biocore_log_base=project_env["LOG_BASE"]
         if project_env["CWL_SCRIPT"]: self.project_cwl_script=project_env["CWL_SCRIPT"]
         if project_env["RUN_ID"]: self.project_run_id=project_env["RUN_ID"]
         if project_env["READS_BASE"]:self.scratch_reads_base=project_env["READS_BASE"]
+        if project_env["RESULTS_DIR"]:self.project_results_base=project_env["RESULTS_DIR"]
         if project_env["PATH2_JSON_FILES"]:self.bicore_pipelinejson_dir=project_env["PATH2_JSON_FILES"]
         if project_env["PIPELINE_META_BASE"]:self.bicore_pipelinemeta_dir=project_env["PIPELINE_META_BASE"]
         if project_env["JSON_TEMPLATE"]:
@@ -98,6 +136,10 @@ class BiocoreProjectInfoDOM:
     ##
     def get_s3_path(self,biocore_path):
         return biocore_path.replace(self.biocore_data_base,self.biocore_s3_data_base)
+    ##
+    # returns the URI of our S3 path
+    def get_s3_uri(self,s3_path):
+        return s3_path.replace(self.biocore_s3_data_base, self.biocore_s3_data_uri)
 
     def create_s3_dir(self,s3_dir):makedir_p(s3_dir)
 
@@ -148,5 +190,11 @@ if __name__== "__main__":
     print("\n********************\nList of items to migrate to AWS EFS file system:\n********************\n")
     for biocore_path,efs_path in biocore_obj.efs_biocore_items_map.items():
          print("Path on biocore servers:%s\nPath on AWS EC2 instance:%s\n____________________"%(biocore_path,efs_path)) 
+    s3_path=biocore_obj.get_s3_path(biocore_obj.project_results_base)
+    print("Project RunID base:\nBiocore path:%s\nCloud path:%s\n"%(biocore_obj.project_results_base,s3_path))
+    read_suffix="fastq.gz"
+    samples=biocore_obj.get_reads_list(read_suffix)
+    for sample,reads in samples.items():
+        print("%s: %s"%(sample,";".join(reads)))
     
     

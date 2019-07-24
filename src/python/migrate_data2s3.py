@@ -64,12 +64,13 @@ The program will fail with error if anyone of the project's expected structures 
 ## Transfers data from local file system to S3 buckets
 ## using S3 sync utilities 
 #
-def transfer_data2s3(biocore_obj,datasync_obj,log):
+def transfer_data2s3(biocore_obj,datasync_obj,log,read_suffix):
     done_list=[]
     for biocore_path,s3_path in biocore_obj.s3_biocore_items_map.items():
         ##remove trailing back slash from path
         if biocore_path.endswith("/"):biocore_path=biocore_path[:-1]
         if s3_path.endswith("/"):s3_path=s3_path[:-1]
+        reads_transfer=False
         target_token=None
         if isfile(biocore_path):
            s3_dir_base=dirname(s3_path)
@@ -80,17 +81,28 @@ def transfer_data2s3(biocore_obj,datasync_obj,log):
            source_base=biocore_path
         transfer_label=target_token
         if transfer_label is None: transfer_label=basename(biocore_path)
-        s3_uri=s3_dir_base.replace(biocore_obj.biocore_s3_data_base, biocore_obj.biocore_s3_data_uri)
+        s3_uri=biocore_obj.get_s3_uri(s3_dir_base)
         if s3_uri in done_list: continue
+        if biocore_obj.project_reads_base in source_base:
+            samples=biocore_obj.get_reads_list(read_suffix)
+            s3_reads_list=[f for f in os.listdir(s3_dir_base) if isfile(join(s3_dir_base,f))]
+            for sample,reads in samples.items():
+                for read_file in reads:
+                    if read_file.replace(".gz","") not in s3_reads_list:reads_transfer=True
+ 
         log.write("----------------------------\n")
         log.write("Transferring : %s \n"%(transfer_label))
         log.write("Source: %s\nDestination: %s\nS3 URI: %s\n"%(source_base,s3_dir_base,s3_uri))
-        log.write("Transfer started:%s\n"%( datetime.now()))
-        cmd="aws s3 sync "+source_base+" "+s3_uri
-        log_console=datasync_obj.s3_sync(source_base,s3_uri)
-        print("Migrating: %s\nCMD:%s\n"%(transfer_label,cmd))
-        log.write("Transfer logs:\n%s\n"%(log_console))
-        log.write("Transfer ended:%s\n"%( datetime.now()))
+        if biocore_obj.project_reads_base in source_base and reads_transfer is False:
+            log.write("Skipping Reads Transfer to S3\n")
+            print("Skipping Reads Transfer to S3\n")
+        else: 
+            log.write("Transfer started:%s\n"%( datetime.now()))
+            cmd="aws s3 sync "+source_base+" "+s3_uri
+            log_console=datasync_obj.s3_sync(source_base,s3_uri)
+            print("Migrating: %s\nCMD:%s\n"%(transfer_label,cmd))
+            log.write("Transfer logs:\n%s\n"%(log_console))
+            log.write("Transfer ended:%s\n"%( datetime.now()))
         done_list.append(s3_uri)
 
 ## Expands sequence read files on S3 stporage as needed
@@ -113,7 +125,7 @@ def expand_reads(s3_reads_path):
 
 if __name__== "__main__":
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hc:", ["help", "cfg="])
+        opts, args = getopt.getopt(sys.argv[1:], "hc:s:", ["help", "cfg=","suffix"])
     except getopt.GetoptError as err:
         # print help information and exit:
         print("ERROR:%s" % (str(err) )) 
@@ -122,8 +134,11 @@ if __name__== "__main__":
     #set program arguments
     pipeline_config=None
     log_file=None
+    ##default value for reads file name suffix
+    reads_suffix="fastq.gz"
     for o, a in opts:
         if o in ("-c", "--cfg"):pipeline_config = a
+        elif o in ("-s","--suffix"):reads_suffix = a
         elif o in ("-h", "--help"):
             prog_usage()
             sys.exit()
@@ -176,12 +191,19 @@ if __name__== "__main__":
     log.write("Log file:%s\n"%(log_file))
     log.write("\n")
     ##Transfer data to cloud
-    transfer_data2s3(biocore_obj,datasync_obj,log)
+    transfer_data2s3(biocore_obj,datasync_obj,log,reads_suffix)
     ## expand reads files if needed
     s3_reads_path=biocore_obj.get_s3_path(biocore_obj.scratch_reads_base)
     if not isdir(s3_reads_path):
         log.write("ERROR: Invalid path to reads - see %s\n"%(s3_reads_path))
     else: expand_reads(s3_reads_path)
     log.write("Program complete\n")
+    ## transfer this runID base
+    s3_results_base=biocore_obj.get_s3_path(biocore_obj.project_results_base)
+    s3_uri=biocore_obj.get_s3_uri(s3_results_base)
+    print("Transferring the results base directory \n")
+    print("Source: %s\nDestination: %s\n\n"%(biocore_obj.project_results_base,s3_results_base))
+    log_console=datasync_obj.s3_sync(biocore_obj.project_results_base,s3_uri)
+    print("Transfer logs:\n%s\n---------------\n"%(log_console))
     print("Program complete.\nCheck the logs for errors:\n%s\n"%(log_file))
     sys.exit()
