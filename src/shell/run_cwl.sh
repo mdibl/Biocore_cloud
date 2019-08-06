@@ -122,15 +122,15 @@ if [ -d $sample_results_dir ]
 then
    if [ "$(ls -A $sample_results_dir)" ]
    then
-       echo "SKIPPING: Pipeline results directory not empty - check $sample_results_dir" | tee -a $log
-       exit 0
+       echo "Archiving previous run results to $sample_results_dir.archive" | tee -a $log
+       mv $sample_results_dir $sample_results_dir.archive
    fi
 fi
 #
 [ ! -d $sample_results_dir ] && mkdir -p $sample_results_dir
 ## Set permissions on newly created directory
-chown $CURRENT_USER $sample_results_dir
-chmod 775 $sample_results_dir
+chmod g+w $sample_results_dir
+
 ## Run the command under $results_dir
 cd $sample_results_dir
 #Command Line
