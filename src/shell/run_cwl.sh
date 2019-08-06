@@ -141,7 +141,7 @@ echo ""
 echo "************************************************************************" | tee -a $log
 echo ">>> CWLTOOL Logs start here "
 
-$CMD | tee -a $log  2>&1
+$CMD >> $log  2>&1
 
 #
 echo ">>> CWLTOOL Logs end here " | tee -a ${log}
