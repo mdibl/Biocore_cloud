@@ -87,14 +87,14 @@ then
   echo "ERROR: Project result directory missing - see: ${RESULTS_DIR} "  | tee -a $log
   exit 1
 fi
-echo ""|tee -a $log
-echo "************************************************************************" | tee -a $log
-echo "*      SampleID: $sample_name                   "| tee -a $log
-echo "*      Date:  `date`                  "| tee -a $log
-echo "*      Current User: `id -un`                  "| tee -a $log
-echo "*      Results Base:  $RESULTS_DIR                "| tee -a $log
-echo "*      Cwl Script:$CWL_SCRIPT                  "| tee -a $log
-echo "*      Sample Json File:$JSON_FILE                  "| tee -a $log
+echo "">> $log
+echo "************************************************************************" >> $log
+echo "*      SampleID: $sample_name                   " >> $log
+echo "*      Date:  `date`                  " >> $log
+echo "*      Current User: `id -un`                  " >> $log
+echo "*      Results Base:  $RESULTS_DIR                " >> $log
+echo "*      Cwl Script:$CWL_SCRIPT                  " >> $log
+echo "*      Sample Json File:$JSON_FILE                  " >> $log
 #
 ## Checks logs for failure 
 function getLogStatus() {
@@ -122,7 +122,7 @@ if [ -d $sample_results_dir ]
 then
    if [ "$(ls -A $sample_results_dir)" ]
    then
-       echo "Archiving previous run results to $sample_results_dir.archive" | tee -a $log
+       echo "Archiving previous run results to $sample_results_dir.archive" >> $log
        mv $sample_results_dir $sample_results_dir.archive
    fi
 fi
@@ -136,21 +136,22 @@ cd $sample_results_dir
 #Command Line
 CMD="$CWLTOOL $CWL_COMMAND_OPTIONS ${CWL_SCRIPT} ${JSON_FILE} "
 echo "" 
-echo "Command Line: $CMD" | tee -a $log
+echo "Command Line: $CMD" >> $log
 echo "" 
-echo "************************************************************************" | tee -a $log
+echo "************************************************************************" >> $log
 echo ">>> CWLTOOL Logs start here "
 
 $CMD >> $log  2>&1
 
 #
-echo ">>> CWLTOOL Logs end here " | tee -a ${log}
-echo "Running sanity check" | tee -a ${log}
+echo ">>> CWLTOOL Logs end here " >> ${log}
+echo "Running sanity check" >> ${log}
 run_status=`getLogStatus ${log}`
-echo "${run_status}" | tee -a $log
+echo "${run_status}" >> $log
 [ "${run_status}" != Success ] && exit 1
 #
-echo "" | tee -a ${log}
-echo "Program complete - Check results under $sample_results_dir"| tee -a ${log}   
+echo "" >> ${log}
+echo "Program complete - Check results under $sample_results_dir" >> ${log}   
+echo `cat $log`
 date
 exit 0
