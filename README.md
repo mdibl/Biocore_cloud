@@ -26,12 +26,11 @@ Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers
  [<img src="images/biocore-pipelines-scripts.png">](images/biocore-pipelines-scripts.png)
 
 
-Depending of the workload, you have the following four options to run your pipeline :
+Depending of the workload, you have these options to run your pipeline :
 
-### Option 1: Run multiple pipelines on local servers
-### Option 2: Run multiple pipelines on AWS cloud servers
-### Option 3: Run single pipeline on local server
-### Option 4: Run single pipeline on AWS Instance
+### Option 1: Run pipelines on AWS cloud servers
+### Option 2: Run pipelines on local servers
+
 
 
 ## Scripts and Files Organization
