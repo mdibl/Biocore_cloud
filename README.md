@@ -22,32 +22,17 @@ Worker nodes are a hybrid of Amazon EC2 instances and MDIBL servers
 
 ## Biocore Pipeline Run Steps
   
-This is the base directory  for **scripts and configuration files** used to
-run a given biocore pipeline analysis.
-
-See::
-
-
 
  [<img src="images/biocore-pipelines-scripts.png">](images/biocore-pipelines-scripts.png)
 
 
-You have the following four options to run your pipeline :
+Depending of the workload, you have the following four options to run your pipeline :
 
-```
- Option 1: Run multiple pipelines on local servers
-         gen-project-config => json_generator => gen-pipeline-pcf => pipelines-in-parallel/local => gen-matrix
+### Option 1: Run multiple pipelines on local servers
+### Option 2: Run multiple pipelines on AWS cloud servers
+### Option 3: Run single pipeline on local server
+### Option 4: Run single pipeline on AWS Instance
 
- Option 2: Run multiple pipelines on AWS cloud servers
-         gen-project-config => json_generator => gen-pipeline-pcf => pipelines-in-parallel/cloud => gen-matrix
-
- Option 3: Run single pipeline on local server
-         gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local
-
-  Option 4: Run single pipeline on AWS Instance
-         gen-project-config => json_generator => gen-pipeline-pcf => single-sample-pipeline-local => gen-matrix
-
-```
 
 ## Scripts and Files Organization
 
