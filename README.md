@@ -35,22 +35,17 @@ Depending of the workload, you have these options to run your pipeline :
 
 ## Scripts and Files Organization
 
-All the in-house scripts used to run the pipelines are  github version-controlled. 
-The main repository is **biocore_cloud** and has the following structure:
+The root directory is organized as followed:
 
 - README.md	
 - [cfgs/ ](#config-files-sub-directory)		
-- docs/		
+- [docs/](#useful-documents)		
 - [images/](#images-sub-directory)	
 - [src/](#scripts-sub-directory)
-  - [The Experiment-level Congig file generator](#the-experiment-level-config-file-generator)
-  - [Sample-specific json file generator](#sample-specific-json-file-generator)
-  - [Sample-specific pcf file generator](#sample-specific-pcf-file-generator)
-  - [Submit Multi-Samples Run](#multi-samples-pipeline-run-trigger)
-
-We install this git repository locally under 
-
-* **/opt/software/internal**
+  - [shell/](#shell-scripts)
+  - [python/](#python-scripts)
+  - [cwl/](#cwl-scripts)
+ 
 
 ### Config files Sub-directory
 
