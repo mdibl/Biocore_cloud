@@ -41,4 +41,9 @@ def create_json_file(json_file,json_data):
     with io.open(json_file, 'w', encoding='utf8') as outfile:
          str_ = json.dumps(json_data,indent=4, sort_keys=True,separators=(',', ': '), ensure_ascii=False)
          outfile.write(to_unicode(str_))
-                                        
+
+##uses the system rsync utils to synch the content of two directories - source_dir and dest_dir                                        
+def rsync_directories(src_dir,dest_dir):
+    cmd="rsync -avz  --exclude=.snapshot "+src_dir+" "+dest_dir
+    return sp.Popen(cmd,shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
+
