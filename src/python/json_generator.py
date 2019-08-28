@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from os.path import join,isfile,isdir,dirname,basename
+from shutil import copyfile
 import getopt,os,sys,re
 import io,json
 import subprocess as sp
@@ -94,7 +95,7 @@ class SampleDOM:
                     for read_file in reads:
                         if token in reads[read_file]:reads[read_file].remove(token)
                 # Assembly and quantification step
-            except:raise
+            except:pass
             read_file=None
             for read in reads:
                 if read_number in reads[read]:read_file=read
@@ -106,6 +107,8 @@ def loadEnv(config_file):
     project_env={}
     output=sp.Popen("source "+config_file+";env",shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
     for line in output.splitlines():
+        # Skip lines with comments
+        if line.startswith("#"):continue 
         if "=" in line:
             try:
                 key,value=line.split("=")
@@ -195,16 +198,20 @@ if __name__== "__main__":
     if not isfile(json_template):
         print("ERROR: Json template file is  missing - see:%s"%(json_template))
         sys.exit()
-    ## get list of reads file names
-    reads_base=project_env["ORIGINAL_READS_BASE"]
-    reads=[f for f in os.listdir(reads_base) if isfile(join(reads_base,f))] 
-    print reads
+    ## Load json template into an object
     json_obj=None
     with open(json_template) as f:
         json_obj=json.load(f)
     if json_obj is None:
         print("ERROR: Failed to open Json template - see:%s"%(json_template))
         sys.exit()
+    ##Enforce our standards by making a copy of json template under this runID cfgs directory if needed
+    cfgs_base=dirname(pipeline_config).strip()
+    json_template_base=dirname(json_template).strip()
+    json_template_file=basename(json_template).strip()
+    if cfgs_base not in json_template_base: 
+        copyfile(json_template,join(cfgs_base,json_template_file))
+    
     log=open(log_file,'w') 
     log.write("**********************************\n")
     log.write("**********************************\n")
@@ -214,9 +221,13 @@ if __name__== "__main__":
     log.write("Json template:%s\n"%(json_template)) 
     log.write("Json files base directory:%s\n"%(json_base_dir)) 
     log.write("Experiment Design File:%s\n"%(design_file))
+    log.write("Experiment Reads base:%s\n"%(project_env["ORIGINAL_READS_BASE"]))
+    log.write("Experiment Run config File:%s\n"%(pipeline_config))
     bad_format=False
     json_obj["project_run_id"]=project_run_id
-
+    ## get list of reads file names
+    reads_base=project_env["ORIGINAL_READS_BASE"]
+    reads=[f for f in os.listdir(reads_base) if isfile(join(reads_base,f))]
     with open(design_file,'r') as f:
         try:
             for line in f.readlines():
@@ -234,7 +245,6 @@ if __name__== "__main__":
                     log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
                     bad_format=True
                     continue
-                print project_env["READS_BASE"]
                 read1=join(project_env["READS_BASE"],sample.get_read_file(sample.id,"1"))
                 read2=None
                 sample_json_obj=json_obj
@@ -254,12 +264,11 @@ if __name__== "__main__":
                      str_ = json.dumps(sample_json_obj,indent=2, sort_keys=True,separators=(',', ': '), ensure_ascii=False)
                      outfile.write(to_unicode(str_))
                 print("Sample:%s\nJson file:%s\n"%(sample.id,sample_json_file))
-        except:raise
+        except:pass
     if bad_format:
         log.write("Failed\n")
-        print("Program failed\n")
+        print("Program failed - check the log file:%s\n"%(log_file))
         sys.exit(1)
-
     log.write("Program complete\n")
     print("Program complete\n")
     sys.exit()
