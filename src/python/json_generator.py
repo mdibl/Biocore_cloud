@@ -3,8 +3,9 @@ from os.path import join,isfile,isdir,dirname,basename
 from shutil import copyfile
 import getopt,os,sys,re
 import io,json
-import subprocess as sp
+import global_m as gb
 from datetime import date
+
 
 '''
 Organization: MDIBL
@@ -101,28 +102,6 @@ class SampleDOM:
                 if read_number in reads[read]:read_file=read
             return read_file.replace(".gz","")
 
-## Get global environment variables
-## setting  from this project runID main config file 
-def loadEnv(config_file):
-    project_env={}
-    output=sp.Popen("source "+config_file+";env",shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
-    for line in output.splitlines():
-        # Skip lines with comments
-        if line.startswith("#"):continue 
-        if "=" in line:
-            try:
-                key,value=line.split("=")
-                project_env[key]=value
-            except:pass
-    return project_env
-
-def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except OSError as exc:  # Python >2.5
-        #if exc.errno == errno.EEXIST and isdir(path):
-        pass
-
 if __name__== "__main__":
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hc:j:s:", 
@@ -162,7 +141,7 @@ if __name__== "__main__":
     #  5)READS_BASE
     #  6)RUN_ID
   
-    project_env=loadEnv(pipeline_config)  
+    project_env=gb.loadEnv(pipeline_config)  
     if not project_env["LOG_BASE"]:
         print("ERROR: Log directory missing - see:%s"%(project_env["LOG_BASE"]))
         print("create the above directory and try again.")
@@ -176,10 +155,10 @@ if __name__== "__main__":
         sys.exit()
 
     if not isdir(project_env["LOG_BASE"]):
-        mkdir_p(project_env["LOG_BASE"])
+        gb.mkdir_p(project_env["LOG_BASE"])
     log_file=join(project_env["LOG_BASE"],basename(__file__)+".log")
     if not isdir(project_env["PATH2_JSON_FILES"]):
-        mkdir_p(project_env["PATH2_JSON_FILES"])
+        gb.mkdir_p(project_env["PATH2_JSON_FILES"])
     json_base_dir=project_env["PATH2_JSON_FILES"]
     if json_template is None: 
         json_template=project_env["JSON_TEMPLATE"]
