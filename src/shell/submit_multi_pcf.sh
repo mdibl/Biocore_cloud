@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-## Assumptions: assumes the following structure under the parent directory
+#Assumptions: assumes the following structure under the parent directory
 #  of this script
 #   1) cfgs
 #   2) src
@@ -9,7 +9,11 @@
 #  1) jenkins.cfg
 # 
 #Usage:
-# ./submit_job.sh path2/pipeline.cfg [sampleID]
+# ./submit_job.sh path2/pipeline.cfg server_type [sampleID]
+# 
+#What it does:
+#  The program triggers a pipeline build on Jenkins for each sample listed 
+#  in the design file(Example 1) orfor the specified sampleID 
 #
 source /etc/profile.d/biocore.sh
 

@@ -1,10 +1,21 @@
-##
+#
+#What It Does: setup the expected directory structure for the results
+# and generates the main config file(pipeline.cfg) for this project runID.
+#
 ## Assumptions: assumes the following structure under the working directory
 #   1) ../../cfgs
 #   2) ../src
 ## Assumptions: assumes the following config files in the cfgs directory
 #  1) biocore.cfg
+#
+#Usage:  run the command ./gen_config.sh to see the usage  
 # 
+#Organization: MDIBL
+#Author: Lucie N. Hutchins
+#Contact: lucie.hutchins@mdibl.org
+#Modified: July 2019
+#
+
 source /etc/profile.d/biocore.sh
 
 cd `dirname $0`
