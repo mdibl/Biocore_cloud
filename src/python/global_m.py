@@ -4,13 +4,22 @@ import subprocess as sp
 from os import makedirs
 import io, json
 
+'''
+Organization: MDIBL
+Author: Lucie N. Hutchins
+Contact: lucie.hutchins@mdibl.org
+Date: August 2019
+
+'''
+
 ## Get global environment variables
 ## setting  from this project runID main config file 
 def loadEnv(config_file):
     project_env={}
-    output=sp.Popen("source "+config_file+";env",
-                     shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
+    output=sp.Popen("source "+config_file+";env",shell=True, stdout=sp.PIPE, stderr=sp.STDOUT).stdout.read()
     for line in output.splitlines():
+        # Skip lines with comments
+        if line.startswith("#"):continue 
         if "=" in line:
             try:
                 key,value=line.split("=")
@@ -23,6 +32,7 @@ def mkdir_p(path):
         if not isdir(str(path)): makedirs(path)
     except:pass
 
+## Creates a formatted json file given an object
 def create_json_file(json_file,json_data):
     try:
         to_unicode = unicode
