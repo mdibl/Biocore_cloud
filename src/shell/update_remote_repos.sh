@@ -98,10 +98,11 @@ then
   echo "Cmd: $git_prog clone https://$GIT_TOKEN@$GIT_URL/$GIT_ORG/$repos_name.git"
   exit 1
 fi
-# now rsync production to the cloned copy
+# rsync production to the cloned copy
 $python_prog $rsync_script -s $BC_PROD_BASE/$repos_name -d $CLONE_REPOS_BASE/$repos_name >> $log_file 2>&1
-echo "Program complete"
-exit 0
+
+# push local updates to remote if detected
+#
 git_fetch=$(git status | grep "working tree clean"  2>&1)
 if [ -z "$git_fetch" ]
 then
