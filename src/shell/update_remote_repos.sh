@@ -101,6 +101,7 @@ fi
 # rsync production to the cloned copy
 $python_prog $rsync_script -s $BC_PROD_BASE/$repos_name -d $CLONE_REPOS_BASE/$repos_name >> $log_file 2>&1
 
+cd $CLONE_REPOS_BASE/$repos_name
 # push local updates to remote if detected
 #
 git_fetch=$(git status | grep "working tree clean"  2>&1)
