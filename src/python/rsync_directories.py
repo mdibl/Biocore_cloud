@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import isdir,basename
+from os.path import isdir,basename,join
 import getopt,sys
 import global_m as gb
 from datetime import date
@@ -32,8 +32,14 @@ def prog_usage():
        python PROG  -s /data/projects/Biocore/biocore_analysis -d /home/bioadmin/git_repos/biocore_analysis
        OR
        python PROG  --src=/data/projects/Biocore/biocore_analysis -dest=/home/bioadmin/git_repos/biocore_analysis
- Where PROG is this script name
- 
+
+ Where PROG is this script name - 
+
+ The program assumes one of the following:
+ 1) source_dir and dest_dir are local to the server running this script
+ 2) OR in case one or both target directories are on a remote server, 
+    the user has established passwordless connection between the local server running this program
+    and the remote server hosting the target directories.   
    '''
     print("%s"%(usage))
 
@@ -63,19 +69,26 @@ if __name__== "__main__":
     if source_dir is None or dest_dir is None:
         prog_usage()
         sys.exit()
-    if  not isdir(source_dir) is None or not isdir(dest_dir):
-        print("ERROR: Bad input - see usage ")
+    if  not isdir(source_dir):
+        print("ERROR: Bad source directory - see:%s "%(source_dir))
         prog_usage()
         sys.exit()
+    if  not isdir(dest_dir):
+        print("ERROR: Bad destination directory - see:%s "%(dest_dir))
+        prog_usage()
+        sys.exit()
+    
     ##reformat the input
     if not source_dir.endswith("/"):source_dir+="/"
     if not dest_dir.endswith("/"):dest_dir+="/"
+    target_dir=dest_dir
+    if target_dir.endswith("/"):target_dir=target_dir[:-1]
     project_env=gb.loadEnv("~/.bashrc")
     log_file=basename(__file__)+".log"
     if isinstance(project_env, dict) and "LOGS_BASE" in project_env:
         if not isdir(project_env["LOGS_BASE"]):
             gb.mkdir_p(project_env["LOGS_BASE"])
-        log_file=join(project_env["LOGS_BASE"],basename(__file__)+".log")
+        log_file=join(project_env["LOGS_BASE"],basename(target_dir)+"."+basename(__file__)+".log")
     ## rsync the content between the source and destination directories
     log=open(log_file,'w')
     log.write("**********************************\n")
