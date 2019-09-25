@@ -52,7 +52,7 @@ def prog_usage():
        2) Both json template(template.json) and the pipeline.cfg have been generated under the same directory(cfgs)
        3) AWS CLI is installed on server running this script 
        4) The pipeline steps and standards followed as specified in our documentation
-       5) Our file server bc-node02.mdibl.net is the designated server to run data migrations
+       5) Our file server bc-node02 is the designated server to run data migrations
 
 The program will fail with error if anyone of the project's expected structures is missing or is invalid.
 
