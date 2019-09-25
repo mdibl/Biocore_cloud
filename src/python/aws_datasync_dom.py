@@ -12,7 +12,7 @@ Organization: MDIBL
 Author: Lucie N. Hutchins
 Contact: lucie.hutchins@mdibl.org
 Date: May 2019
-Modified: July 2019
+Modified: September 2019
 
 """
 import subprocess as sp
