@@ -103,3 +103,4 @@ if __name__== "__main__":
     log.write("\nRSYNC LOGS:%s\n"%(logs))
     print("Program complete")
     print("For rsync logs, check log file:%s\n"%(log_file))
+    sys.exit()
