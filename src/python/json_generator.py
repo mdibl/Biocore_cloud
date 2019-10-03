@@ -74,7 +74,10 @@ class SampleDOM:
         #    use the map-reduced algorithm to get the right file name
         #
         if len(self.reads)<=0: return None
-        elif len(self.reads)<2: return self.reads[0]
+        elif len(self.reads)<2: 
+            try:            
+                return self.reads[0].replace(".gz")
+            except:pass
         else:
             # Map step
             #   Create a list of string tokens using one string(read_file)
