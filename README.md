@@ -52,7 +52,7 @@ The root directory is organized as followed:
 A set of biocore global settings and   program-specific default command line options.
 * **cfgs/**
    - **aws.cfg**	       - connection settings and path to the info on to AWS	servers
-   - **jenkins.cfg**    - connetion settings to Jenkins 
+   - **jenkins.cfg**    - connection settings to Jenkins 
    - **biocore.cfg**		        - setting expected structure to biocore info
    - **rna-seq.template.json** - json template for rna-seq pipelines
 ```
