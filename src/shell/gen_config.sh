@@ -47,10 +47,12 @@ current_timestamp=${PROJECT_PREFIX}.$(date +%s)
 # name format sampleID.organism.pcf
 PCF_BASE=$8
 PCF_PROJECT_BASE=$PCF_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timestamp
+[ ! -d $PCF_PROJECT_BASE ] && mkdir -p $PCF_PROJECT_BASE
 ##We expect to find a json file for each sample under this path
 # flename format sampleID.organism.json
 JSON_BASE=$9
 JSON_PROJECT_BASE=$JSON_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timestamp
+[ ! -d $JSON_PROJECT_BASE ] && mkdir -p $JSON_PROJECT_BASE
 results_base=${10}
 json_template=${11}
 RESULTS_DIR_BASE=$results_base/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
