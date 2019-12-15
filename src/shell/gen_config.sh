@@ -52,6 +52,7 @@ PCF_PROJECT_BASE=$PCF_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timesta
 JSON_BASE=$9
 JSON_PROJECT_BASE=$JSON_BASE/${PROJECT_TEAM_NAME}/${PROJECT_NAME}/$current_timestamp
 results_base=${10}
+json_template=${11}
 RESULTS_DIR_BASE=$results_base/${PROJECT_TEAM_NAME}/${PROJECT_NAME}
 RESULTS_DIR=${RESULTS_DIR_BASE}/$current_timestamp
 
@@ -161,6 +162,14 @@ then
    echo "ERROR: CWL Script missing - see $CWL_SCRIPT" | tee -a $log_file
    exit 1
 fi
+if [ ! -f $json_template ]
+then
+   echo "ERROR: json template missing - see $json_template" | tee -a $log_file
+   exit 1
+fi
+##copy json template
+cp $json_template $pipeline_json_template
+##create the main pcf file
 touch $pipeline_cfg_file
 echo "###################################################" >> $pipeline_cfg_file
 echo "## ${PROJECT_NAME} Pipeline Global Config File " >> $pipeline_cfg_file
