@@ -30,9 +30,6 @@ class BiocoreProjectInfoDOM:
         self.biocore_s3_data_uri="s3://biocore-data"
         self.biocore_data_base="/data"
         self.biocore_software_base="/opt/software" #base directory for software packages
-        self.aws_account_id=None
-        self.aws_onprem_agent_id=None
-        self.aws_onprem_agent_ip=None
 
         self.project_cwl_script=None         #Path to the project cwl script file
         self.project_design_file=None        #Path to the project design file
@@ -112,9 +109,6 @@ class BiocoreProjectInfoDOM:
         if project_env["RESULTS_DIR"]:self.project_results_base=project_env["RESULTS_DIR"]
         if project_env["PATH2_JSON_FILES"]:self.bicore_pipelinejson_dir=project_env["PATH2_JSON_FILES"]
         if project_env["PIPELINE_META_BASE"]:self.bicore_pipelinemeta_dir=project_env["PIPELINE_META_BASE"]
-        if project_env["AWS_ACCOUNT_ID"]:self.aws_account_id=project_env["AWS_ACCOUNT_ID"]
-        if project_env["AWS_AGENT_ID"]:self.aws_onprem_agent_id=project_env["AWS_AGENT_ID"]
-        if project_env["AWS_AGENT_IP"]:self.aws_onprem_agent_ip=project_env["AWS_AGENT_IP"]
         if project_env["JSON_TEMPLATE"]:
             self.json_template=project_env["JSON_TEMPLATE"]
             try:

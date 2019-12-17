@@ -84,7 +84,7 @@ if __name__== "__main__":
         sys.exit()
   
     biocore_obj=BiocoreProjectInfoDOM(pipeline_config)
-    datasync_obj=AwsDataSyncDOM(biocore_obj.aws_account_id,biocore_obj.aws_onprem_agent_id,biocore_obj.aws_onprem_agent_ip)
+    datasync_obj=AwsDataSyncDOM()
     if biocore_obj.project_cwl_script is None or not isfile(biocore_obj.project_cwl_script):
         print("ERROR: Experiment cwl script file missing - see path:%s"%(biocore_obj.project_cwl_script))
         sys.exit()

@@ -21,15 +21,15 @@ import json
 import  global_m as gb_m
 
 class AwsDataSyncDOM:
-    def __init__(self,account_id,agent_id,agent_ip):
+    def __init__(self):
         self.region_id="us-east-1"
-        self.account_id=account_id
+        self.account_id="012870262837"
         self.subnet_id="subnet-6b46b90c"
         self.subnet_arn="arn:aws:ec2:us-east-1:012870262837:subnet/subnet-6b46b90c"
         self.security_group_id="sg-30f3ff79"
         self.security_group_arn="arn:aws:ec2:us-east-1:012870262837:security-group/sg-30f3ff79"
-        self.onprem_agent_id=agent_id
-        self.onprem_agent_ip=agent_ip
+        self.onprem_agent_id="agent-09909c9a6255bde37"
+        self.onprem_agent_ip="192.168.250.128"
         self.onprem_agent_arn="arn:aws:datasync:us-east-1:012870262837:agent/agent-09909c9a6255bde37"
         self.item_class={}
         #
