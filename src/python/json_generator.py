@@ -64,8 +64,9 @@ class SampleDOM:
     def set_sample(self,reads_list,reads_suffix):
         if reads_list:
             for read_file in reads_list:
+                read_file=read_file.strip()
                 if read_file.startswith(self.id) and read_file.endswith(reads_suffix):
-                    self.reads.append(read_file)
+                       self.reads.append(read_file)
     
     def get_read_file(self,sampleID,read_number):
         # Logic:
@@ -76,7 +77,7 @@ class SampleDOM:
         if len(self.reads)<=0: return None
         elif len(self.reads)<2: 
             try:            
-                return self.reads[0].replace(".gz")
+                return self.reads[0].replace(".gz","")
             except:pass
         else:
             # Map step
@@ -219,12 +220,17 @@ if __name__== "__main__":
                 line=line.strip()
                 fields=line.split('\t')
                 sample=SampleDOM(fields[0].strip(),reads,reads_suffix)
-                read_file_format='sampleID[delimiter]readID[delimiter][...]suffix'
+                read_file_format=sample.id+"[delimiter]readID[delimiter][...]"+reads_suffix
                 log.write("----------------------------\n")
                 log.write("SampleID:%s\n"%(sample.id))
+                log.write("Read files suffix:%s\n"%(reads_suffix))
                 log.write("Number of Reads:%d\n"%(len(sample.reads)))
+                
                 if len(sample.reads)<=0:
-                    log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
+                    try:
+                        log.write("ERROR: Bad read files name - expected format - %s\n"%(read_file_format))
+                        log.write("Original reads files are expected under - %s\n"%(project_env["ORIGINAL_READS_BASE"]))
+                    except:pass
                     bad_format=True
                     continue
                 read1=join(project_env["READS_BASE"],sample.get_read_file(sample.id,"1"))
