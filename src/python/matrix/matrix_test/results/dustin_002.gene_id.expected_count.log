@@ -1,0 +1,34 @@
+
+****************** gen_matrix ********************************************************
+
+The tool generates a matrix file under the specified --outdir  .
+
+***************************************************************************************
+    
+Output Directory: /Users/lhutchin/projects/mdibl/temp/fungene/matrix/matrix_test/results
+Results File: /Users/lhutchin/projects/mdibl/temp/fungene/matrix/matrix_test/results/dustin_002.gene_id.expected_count.txt
+Target Colunm index: 4
+Colunm index of rowIDs: 0
+Round results: False
+Input Files Count: 12
+Input Files List:
+==
+FileID	FileName	ColunmsCount	RowsCount	RowIDsHeader	TargetColunmHeader
+f1	matrix_test/test_data/144-1P.genes.results	7	46779	gene_id	expected_count
+f2	matrix_test/test_data/144-1T.genes.results	7	46779	gene_id	expected_count
+f3	matrix_test/test_data/144-2T.genes.results	7	46779	gene_id	expected_count
+f4	matrix_test/test_data/144-2P.genes.results	7	46779	gene_id	expected_count
+f5	matrix_test/test_data/144-3P.genes.results	7	46779	gene_id	expected_count
+f6	matrix_test/test_data/144-3T.genes.results	7	46779	gene_id	expected_count
+f7	matrix_test/test_data/64-1T.genes.results	7	46779	gene_id	expected_count
+f8	matrix_test/test_data/64-1P.genes.results	7	46779	gene_id	expected_count
+f9	matrix_test/test_data/64-3T.genes.results	7	46779	gene_id	expected_count
+f10	matrix_test/test_data/64-3P.genes.results	7	46779	gene_id	expected_count
+f11	matrix_test/test_data/64-2P.genes.results	7	46779	gene_id	expected_count
+f12	matrix_test/test_data/64-2T.genes.results	7	46779	gene_id	expected_count
+==
+Program Started: 2019-12-10 18:46:24.622014
+Program Ended: 2019-12-10 18:46:42.377599
+Memory Usage Before: [47.71484375] MB
+Memory Usage After: [88.79296875] MB
+Matrix generator took 17.648047 seconds
