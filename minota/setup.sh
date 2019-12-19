@@ -20,8 +20,8 @@ then
    exit 1
 fi
 
-source ./config/biocore.cfg
-source ./config/.users.cfg
+source ./../cfgs/biocore.cfg
+source ./../cfgs/.users.cfg
 
 ##Create user's working directory under
 ## ec2-user's home -- 
