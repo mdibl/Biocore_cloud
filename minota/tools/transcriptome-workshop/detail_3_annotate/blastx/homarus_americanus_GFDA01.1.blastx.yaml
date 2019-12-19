@@ -1,0 +1,13 @@
+transcript:
+    class: File
+    path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt
+blastdb_dir:
+    class: Directory
+    path: /data/external/trinotatedb/
+database:
+    class: File
+    path: /data/external/trinotatedb/uniprot_sprot.pep
+num_threads: 8
+max_target_seqs: 5
+outfmt: 6
+e_value: 1e-3

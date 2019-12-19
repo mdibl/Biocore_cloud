@@ -1,0 +1,38 @@
+in_fastq:
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-1P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-1T.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-2P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-2T.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-3P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-3T.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-1P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-1T.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-2P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-2T.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-3P.fastq
+  - class: File
+    format: 'edam:format_1930'
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/64-3T.fastq 
+n_threads: 8

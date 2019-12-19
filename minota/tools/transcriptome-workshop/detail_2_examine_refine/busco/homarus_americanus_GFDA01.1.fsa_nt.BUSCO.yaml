@@ -1,0 +1,22 @@
+blastSingleCore: null
+cpu: 8
+evalue: null
+force: null
+help: null
+lineage:
+  class: Directory
+  path: /tmp/metazoa_odb9
+long: null
+mode: tran
+outputName: TEST
+quiet: null
+regionLimit: null
+restart: null
+sequenceFile:
+  class: File
+  format: 'edam:format_1929'
+  path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt
+species: null
+tarzip: null
+tempPath: null
+version: null

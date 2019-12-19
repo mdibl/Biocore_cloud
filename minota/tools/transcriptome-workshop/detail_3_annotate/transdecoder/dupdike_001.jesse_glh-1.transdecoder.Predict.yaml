@@ -1,0 +1,15 @@
+geneticCode: null
+longOpenReadingFrames:
+  class: Directory
+  path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/trinity_allT_strandR/Trinity.fasta.transdecoder_dir
+noRefineStarts: null
+retainBlastpHits: null
+retainLongOrfsLength: null
+retainLongOrfsMode: null
+retainPfamHits: null
+singleBestOnly: true
+train: null
+transcriptsFile:
+  class: File
+  format: 'edam:format_1929'
+  path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/trinity_allT_strandR/Trinity.fasta

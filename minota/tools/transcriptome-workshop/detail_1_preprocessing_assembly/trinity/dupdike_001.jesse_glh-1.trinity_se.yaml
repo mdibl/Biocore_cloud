@@ -1,0 +1,7 @@
+trinity_ss_lib_type: R
+trinity_seq_type: fq
+trinity_max_mem: 50G
+trinity_cpu: 8
+single_reads: 
+    class: File
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-1T.fastq

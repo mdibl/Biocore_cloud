@@ -1,0 +1,4 @@
+query:
+  class: File
+  path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/trinity_allT_strandR/Trinity.fasta
+cpu: 8

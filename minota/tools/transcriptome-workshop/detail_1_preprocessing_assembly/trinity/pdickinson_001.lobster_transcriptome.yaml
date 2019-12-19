@@ -1,0 +1,9 @@
+trinity_ss_lib_type: RF
+trinity_seq_type: fq
+trinity_max_mem: 200G
+trinity_cpu: 24
+normalize_by_read_set: true
+trimmomatic: true
+samples_file:
+  class: File
+  path: /data/external/PatsyDickinson/pdickinson_001.lobster_transcriptome/pdickinson_001.samples_file.txt

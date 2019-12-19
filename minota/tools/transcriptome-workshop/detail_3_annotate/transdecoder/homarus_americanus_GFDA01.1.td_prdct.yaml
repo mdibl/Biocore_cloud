@@ -1,0 +1,15 @@
+geneticCode: null
+longOpenReadingFrames:
+  class: Directory
+  path: /home/ec2-user/nathanielmki/Homarus_americanus_GFDA01.1.fsa_nt.transdecoder_dir
+noRefineStarts: null
+retainBlastpHits: null
+retainLongOrfsLength: null
+retainLongOrfsMode: null
+retainPfamHits: null
+singleBestOnly: true
+train: null
+transcriptsFile:
+  class: File
+  format: 'edam:format_1929'
+  path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt

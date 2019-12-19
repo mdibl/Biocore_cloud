@@ -1,0 +1,4 @@
+input:
+    class: File
+    path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt
+outName: homarus_americanus_GFDA01.1_cd-hit-est

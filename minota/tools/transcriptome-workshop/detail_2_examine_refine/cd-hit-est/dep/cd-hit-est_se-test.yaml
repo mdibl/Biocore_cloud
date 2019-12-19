@@ -1,0 +1,6 @@
+single_reads:
+    class: File
+    path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt
+output_filename: homarus_americanus_GFDA01.1_cd-hit-est
+cdhit_max_memory: 800
+cdhit_max_cpu: 8

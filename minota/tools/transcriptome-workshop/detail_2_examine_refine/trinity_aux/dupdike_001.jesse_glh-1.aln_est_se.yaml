@@ -1,0 +1,13 @@
+trinity_ss_lib_type: R
+trinity_seq_type: fq
+trinity_aln_method: bowtie2
+trinity_est_method: RSEM
+trinity_mode: true
+prep_reference: true
+output_dir: RSEM_outdir
+transcripts:
+    class: File
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/trinity_allT_strandR/Trinity.fasta
+single_reads:
+  - class: File
+    path: /data/scratch/transcriptome-assembly/DustinUpdike/dupdike_001.jesse_glh-1/144-1P.fastq

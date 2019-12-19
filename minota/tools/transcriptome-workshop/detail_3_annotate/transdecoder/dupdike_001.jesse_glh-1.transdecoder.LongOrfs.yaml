@@ -1,0 +1,8 @@
+geneToTranscriptMap: null
+geneticCode: null
+minimumProteinLength: null
+strandSpecific: true
+transcriptsFile:
+  class: File
+  format: 'edam:format_1929'
+  path: /data/external/TSA/Homarus_americanus_GFDA01.1.fsa_nt
