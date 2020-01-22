@@ -62,3 +62,34 @@ def prog_use():
 
     '''
     print("%s"%(usage))
+
+    # Transfer data from S3 buckets back to local file system
+    def transfer_data2local(biocore_obj, datasync_obj, log, read_suffix):
+        done_list = []
+        for biocore_path,s3_path in biocore_obj.s3_biocore_items_map.items():
+            # Remove trailing back slash from path
+            if biocore_path.endswith("/"):biocore_path = biocore_path[:-1]
+            if s3_path.endswith("/"):s3_path = s3_path[:-1]
+            reads_transfer = False
+            target_token = None
+            if isfile(biocore_path):
+                s3_dir_base = dirname(s3_path)
+                source_base = dirname(biocore_path)
+                target_token = basename(biocore_path)
+            else:
+                s3_dir_base = s3_path
+                source_base = biocore_path
+            transfer_label = target_token
+            if transfer_label is None: transfer_label = basename(biocore_path)
+            s3_uri = biocore_obj.get_s3_uri(s3_dir_base)
+            if s3_uri in done_list: continue
+            if biocore_obj.project_reads_base in source_base:
+                samples = biocore_obj.get_reads_list(read_suffix)
+                s3_reads_list = [f for f in os.listdir(s3_dir_base) if isfile(join(s3_dir_base,f))]
+                for sample,reads in samples.items():
+                    for read_file in reads:
+                        if read_file.replace(".gz","") not in s3_reads_list:reads_transfer = True
+                        
+            log.write("----------------------------\n")
+            log.write("Transferring : %s \n"%(transfer_label))
+            log.write("Source: %s\nDestination: %s\nS3 URI: %s\n"%(source_base,s3_dir_base,s3_uri))
